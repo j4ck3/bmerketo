@@ -1,0 +1,62 @@
+.bg {
+    background-color: #FAEFEF;
+
+    .sell-card-text-1 {
+        font-weight: $font-weight-bold;
+        font-size: 18px;
+        color: $color-theme-1;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+
+    .sell-card-text-2 {
+        font-family: $font-playfair;
+        font-weight: $font-weight-bold;
+        font-size: 48px;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        color: #363636;
+    }
+
+    .sell-card-text-3 {
+        font-weight: $font-weight-bold;
+        font-size: 24px;
+        margin-bottom: 1rem;
+        color: #363636;
+    }
+
+    .sell-card-text-4 {
+        font-family: $font-roboto;
+        font-weight: $font-weight-regular;
+        font-size: 16px;
+        margin-bottom: 2rem;
+    }
+
+    .sell-card-text-5 {
+        font-weight: $font-weight-regular;
+        font-size: 16px;
+    }
+
+    .sale-card-body {
+        text-align: center;
+        width: 369px;
+        height: 100%;
+        padding: 0 2rem;
+    }
+}
+
+.product-tile-row-title {
+    font-size: 30px;
+    font-weight: $font-weight-semibold;
+    margin: 2rem 0;
+    color: black;
+    text-align: center;
+}
+
+.product-tile-row-button {
+    padding: .5rem 1rem;
+    border: 1px solid black;
+    background: transparent;
+    margin: 2rem .4rem;
+    border-radius: 5px;
+}

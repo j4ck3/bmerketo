@@ -1,0 +1,24 @@
+.bg-mail-sub {
+    background-color: #707070;
+    height: 300px;
+    .mail-sub-body {
+        background-color: white;
+
+        .mail-sub-input {
+            padding: 1.1rem;
+            width: 700px;
+            border-radius: 50px;
+            margin: 3rem 200px;
+        }
+
+        .mail-sub-btn {
+            position: absolute;
+            top: 48px;
+            right: 196px;
+            padding: 18.9px 30px;
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+            border: none;
+        }
+    }
+}

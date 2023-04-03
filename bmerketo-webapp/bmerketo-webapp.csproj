@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>bmerketo_webapp</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
+    <None Include="wwwroot\css\scss\components\_productTile.scss" />
+    <None Include="wwwroot\css\scss\core\_base.scss" />
+    <None Include="wwwroot\css\scss\core\_mixins.scss" />
+    <None Include="wwwroot\css\scss\core\_variables.scss" />
+    <None Include="wwwroot\css\scss\sections\_collections.scss" />
+    <None Include="wwwroot\css\scss\sections\_mailSub.scss" />
+    <None Include="wwwroot\css\scss\sections\_navbar.scss" />
+    <None Include="wwwroot\css\scss\sections\_productTileGrid.scss" />
+    <None Include="wwwroot\css\scss\sections\_wellcome.scss" />
+    <None Include="wwwroot\css\scss\views\_productDetail.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+</Project>

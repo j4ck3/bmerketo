@@ -1,0 +1,239 @@
+﻿.contact-form {
+    padding: 20px 0 60px 0;
+
+
+    @include lg {
+        padding: 60px
+    }
+
+    .container {
+        padding: 30px;
+        border: none;
+        -webkit-box-shadow: 0px 0px 34px 26px rgba(0,0,0,0.1);
+        box-shadow: 0px 0px 34px 26px rgba(0,0,0,0.1);
+
+        #register-form {
+            grid-template-columns: 1fr;
+            grid-template-areas: "firstName" "lastName" "streetName" "postalCode" "city" "mobile" "company" "email" "password" "confirmPassword" "profileImage" "terms" "button ";
+
+            @include lg {
+                grid-template-columns: 1fr 1fr;
+                grid-template-areas: "firstName lastName" "streetName streetName" "postalCode city" "mobile company" "email email" "password password" "confirmPassword confirmPassword" "profileImage profileImage" "terms terms" "button button";
+            }
+        }
+
+
+
+        #contact-form {
+            grid-template-columns: 1fr;
+            grid-template-areas: "name" "email" "phoneNumber" "companyName" "message" "terms" "button";
+
+            @include lg {
+                grid-template-columns: 1fr 1fr;
+                grid-template-areas: "name email" "phoneNumber companyName" "message message" "terms terms" "button button"
+            }
+        }
+
+
+        @include md {
+            border: 1px solid #e1e1e1;
+            border: none;
+        }
+    }
+
+    form {
+        display: grid;
+        -moz-column-gap: 30px;
+        column-gap: 30px;
+        row-gap: 30px;
+
+
+
+        .form-group {
+            width: 100%;
+
+            label {
+                display: block;
+                margin-bottom: 5px
+            }
+
+            span {
+                display: inline-block;
+                color: #fa3150;
+                height: 20px;
+                margin-top: 2px;
+                font-size: .8em
+            }
+
+            textarea, input, input:not([type=checkbox]) {
+                background-color: #fafafa;
+                display: block;
+                position: relative;
+                width: 100%;
+                padding: 10px 15px;
+                outline: 0;
+                border: none;
+
+                &:focus {
+                    outline: 1px solid #aeaeae
+                }
+            }
+        }
+        // contact form
+        .name {
+            grid-area: name;
+        }
+
+        .email {
+            grid-area: email;
+        }
+
+        .phoneNumber {
+            grid-area: phoneNumber;
+        }
+
+        .companyName {
+            grid-area: companyName;
+        }
+
+        .terms {
+            grid-area: terms;
+            margin: 10px 0;
+        }
+
+        .message {
+            grid-area: message;
+        }
+
+        textarea {
+            height: 100px;
+            resize: none;
+        }
+        // register form
+
+        .firstname {
+            grid-area: firstName;
+        }
+
+        .lastName {
+            grid-area: lastName;
+        }
+
+        .streetName {
+            grid-area: streetName;
+        }
+
+        .postalCode {
+            grid-area: postalCode;
+        }
+
+        .city {
+            grid-area: city;
+        }
+
+        .mobile {
+            grid-area: mobile;
+        }
+
+        .company {
+            grid-area: company;
+        }
+
+        .email {
+            grid-area: email;
+        }
+
+        .password {
+            grid-area: password;
+        }
+
+        .confirmPassword {
+            grid-area: confirmPassword;
+        }
+
+        .profileImage {
+            grid-area: profileImage;
+        }
+
+
+
+        .form-group {
+            width: 100%;
+
+            label {
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            span {
+                display: inline-block;
+                color: #fa3150;
+                height: 20px;
+                margin-top: 2px;
+                font-size: .8em
+            }
+        }
+
+        .form-checkbox-group {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center
+        }
+
+        button {
+            grid-area: button;
+
+            @include lg {
+                display: flex;
+                justify-self: flex-start
+            }
+        }
+
+        .custom-checkbox {
+            position: relative;
+            padding-left: 35px;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+
+
+            input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                border: 1px solid #e1e1e1;
+
+                &:checked + .checkmark {
+                    height: 25px;
+                    width: 25px;
+                    background-color: #fafafa;
+                    border: 1px solid #aeaeae;
+                    border-radius: 5px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    &:after {
+                        content: "";
+                        height: 15px;
+                        width: 15px;
+                        background-color: #636363;
+                        border-radius: 5px;
+                    }
+                }
+            }
+
+            .checkmark {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 25px;
+                width: 25px;
+                background-color: #fafafa;
+                border: 1px solid #e1e1e1;
+                z-index: -1
+            }
+        }
+    }
+}

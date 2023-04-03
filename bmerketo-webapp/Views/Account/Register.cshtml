@@ -1,0 +1,67 @@
+﻿<section class="contact-form">
+    <div class="container">
+        <div class="title mb-3">Please Register Your new Account</div>
+        <form id="register-form" novalidate>
+            <div class="firstName form-group">
+                <label for="firstName">First Name*</label>
+                <input id="firstName" type="text" class="invalid" required>
+                <span class="error">First Name is required</span>
+            </div>
+            <div class="lastName form-group">
+                <label for="lastName">Last Name*</label>
+                <input id="lastName" type="text" class="invalid">
+                <span class="error">Last Name is required</span>
+            </div>
+            <div class="streetName form-group">
+                <label for="streetName">Street Name*</label>
+                <input id="streetName" type="text">
+                <span class="error">Street Name is required</span>
+            </div>
+            <div class="postalCode form-group">
+                <label for="postalCode">Postal Code*</label>
+                <input id="postalCode" type="text">
+                <span class="error">Postal Code is required</span>
+            </div>
+            <div class="city form-group">
+                <label for="city">City*</label>
+                <input id="city" class="invalid"></>
+                <span class="error">City is required</span>
+            </div>
+            <div class="mobile form-group">
+                <label for="mobile">Mobile (optional)</label>
+                <input id="mobile" class="invalid"></>
+            </div>
+            <div class="company form-group">
+                <label for="company">Company (optional)</label>
+                <input id="company" class="invalid"></>
+            </div>
+            <div class="email form-group">
+                <label for="email">Email*</label>
+                <input id="email" class="invalid"></>
+                <span class="error">Email is required</span>
+            </div>
+            <div class="password form-group">
+                <label for="password">Password*</label>
+                <input id="password" class="invalid"></>
+                <span class="error">Password is required</span>
+            </div>
+            <div class="confirmPassword form-group">
+                <label for="confirmPassword">Confirm Password*</label>
+                <input id="confirmPassword" class="invalid"></>
+                <span class="error">Please confirm your password</span>
+            </div>
+            <div class="profileImage form-group">
+                <label for="profileImage">Upload Profile Image (optional)</label>
+            </div>
+
+            <div class="terms form-checkbox-group">
+                <label class="custom-checkbox">
+                    I have read and accepts the terms and agreements
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <button class="btn-theme">Submit</button>
+        </form>
+    </div>
+</section>

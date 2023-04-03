@@ -1,0 +1,17 @@
+.container-home {
+    background-color:#F3F2F2;
+
+    .hero-text {
+        color: #292929;
+        font-family: $font-poppins;
+        font-weight: $font-weight-regular;
+        font-size: 18px;
+    }
+
+    h2 {
+        color: #292929;
+        font-family: $font-poppins;
+        font-size: 60px;
+        font-weight: $font-weight-bold;
+    }
+}

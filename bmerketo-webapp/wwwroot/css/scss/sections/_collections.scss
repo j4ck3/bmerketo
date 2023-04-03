@@ -1,0 +1,41 @@
+
+.collection-title {
+    font-weight: $font-weight-semibold;
+    font-size: 48px;
+    text-align: center;
+    color: #292929;
+}
+
+.collection-link {
+    color: #626262;
+    text-decoration: none!important;
+
+    &:hover {
+        color: $color-theme-1;
+    }
+}
+
+.loadmore-btn {
+    border: 1px solid black;
+    color: black;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 2rem auto;
+    display: block;
+    width: 140px;
+}
+
+
+.collection-link + .collection-link::before {
+    color: black;
+    margin: 0 12px;
+    content: "/";
+}
+
+
+
+.home+.breadcrumb-item-sec:before {
+    padding: 8px;
+    color: black;
+    content: "\203A";
+}
