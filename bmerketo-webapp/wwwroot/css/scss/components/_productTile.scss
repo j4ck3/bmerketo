@@ -5,6 +5,18 @@
         width: 369px;
     }
 
+    .product-tile-title {
+        margin: 1rem 0;
+        font-size: 18px;
+        color: black;
+    }
+
+    .product-tile-price {
+        font-size: 16px;
+        color: #636363;
+        font-weight: 400;
+    }
+
     .product-tile-body {
         width: 270px;
     }
@@ -24,8 +36,7 @@
             border-radius: 5px;
         }
     }
-
-/*    h4 {
+    /*        h4 {
         font-weight: $font-weight-regular;
         font-size: 18px;
         color: black;

@@ -273,7 +273,7 @@ header .toggle .btn-white {
   margin-bottom: 1rem;
 }
 .bg .sell-card-text-2 {
-  font-family: "Playfair Display", serif;
+  font-family: "Playfair Display", sans-serif;
   font-weight: 700;
   font-size: 48px;
   text-transform: uppercase;
@@ -519,21 +519,31 @@ header .toggle .btn-white {
 
 .card {
   border: none !important;
-  /*    h4 {
-          font-weight: $font-weight-regular;
-          font-size: 18px;
-          color: black;
-          margin: 10px 0;
-      }
+  /*        h4 {
+      font-weight: $font-weight-regular;
+      font-size: 18px;
+      color: black;
+      margin: 10px 0;
+  }
 
-      p {
-          font-weight: $font-weight-regular;
-          color: #636363;
-          margin: 0;
-      }*/
+  p {
+      font-weight: $font-weight-regular;
+      color: #636363;
+      margin: 0;
+  }*/
 }
 .card .product-tile-xl-body {
   width: 369px;
+}
+.card .product-tile-title {
+  margin: 1rem 0;
+  font-size: 18px;
+  color: black;
+}
+.card .product-tile-price {
+  font-size: 16px;
+  color: #636363;
+  font-weight: 400;
 }
 .card .product-tile-body {
   width: 270px;

@@ -1,14 +1,19 @@
-﻿    <div class="container-home mb-4">
+﻿@model LandingViewModel
+@if (Model != null)
+{
+     <div class="container-home mb-4">
         <div class="container-xxl">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="text-container">
-                    <h1 class="hero-text">WELLCOME TO bmarketo SHOP</h1>
-                    <h2> Exclusive Chair gold Collection.</h2>
-                    <span class="btn-theme">shop now</span>
+                    @if (Model.Title != null) { <h1 class="hero-text">@Model.Title</h1> }
+                    @if (Model.Messgae != null) { <h2>@Model.Messgae</h2> }
+                    @if (Model.Button != null) 
+                    { <a class="btn-theme" asp-controller="product" asp-action="products" asp-route-id="@Model.Button.Url">@Model.Button.Content</a> }
                 </div>
                 <div class="img-container">
-                    <img src="/imgs/placeholders/625x647.svg" alt="man model" />
+                    @if (Model.ImgUrl != null) { <img src="@Model.ImgUrl" alt="@Model.Title" /> }
                 </div>
             </div>
         </div> 
-    </div>
+    </div>  
+}

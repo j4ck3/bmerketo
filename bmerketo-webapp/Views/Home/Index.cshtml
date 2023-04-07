@@ -1,14 +1,15 @@
-﻿
+﻿@model HomeIndexViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
 
+<partial name="../Shared/Partials/Sections/_Landing.cshtml" model="@Model.Landing" />
 
-<partial name="../Shared/Partials/Sections/_Landing.cshtml" />
-<h3 class="collection-title">Best Collection</h3>
-<partial name="../Shared/Partials/Components/_ProductBreadCrumb" />
-<partial name="../Shared/Partials/Sections/_Collections.cshtml" />
-<a class="loadmore-btn">
-    Load More   <i class="fa-solid fa-arrow-rotate-left"></i>
-</a>
-<partial name="../Shared/Partials/Sections/_ProductTileGrid.cshtml" />
-<partial name="../Shared/Partials/Sections/_ProductTileRow.cshtml" />
-<partial name="../Shared/Partials/Sections/_ProductTileRowXl.cshtml" />
+@if (Model.BestCollection != null)
+{
+       <partial name="../Shared/Partials/Sections/_Collections.cshtml" model="@Model.BestCollection" /> 
+}
+<partial name="../Shared/Partials/Sections/_ProductTileGrid.cshtml" model="@Model.ProductTileGrid" />
+<partial name="../Shared/Partials/Sections/_ProductTileRow.cshtml" model="@Model.ProductTileRow" />
+<partial name="../Shared/Partials/Sections/_ProductTileRowXl.cshtml" model="@Model.ProductTileRowXl" />
 <partial name="../Shared/Partials/Sections/_MailSub.cshtml" />

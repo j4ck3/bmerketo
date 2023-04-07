@@ -1,15 +1,24 @@
-﻿<div class="col d-flex justify-content-center">
+﻿@model ItemViewModel
+
+<div class="col d-flex justify-content-center">
     <div class="card">
         <div class="product-tile-body">
-            <div class="model-item-body">
-                <img class="model-item-img" src="/imgs/placeholders/270x295.svg" alt="product" />
-            </div>
+            <a class="model-item-body" asp-controller="products" asp-action="details" asp-route-id="@Model.Id">
+                @if (Model.ImageUrl != null)
+                {
+                    <img class="model-item-img" src="@Model.ImageUrl" alt="@Model.Title" />
+                }
+            </a>
             <div class="d-flex justify-content-between align-items-end">
                 <div>
-                    <h4>Table Lamp</h4>
-                    <p>$35.00</p>
+                    @if (Model.Title != null) { <h2 class="product-tile-title">@Model.Title</h2> }
+                    @if (Model.OldPrice != null) { <span class="product-tile-price text-decoration-line-through me-2">$@Model.OldPrice</span> }
+                    @if (Model.Price != null) { <span class="product-tile-price">$@Model.Price</span> }
                 </div>
-                <NavLink to="/cart" end><i class="fa-solid fa-cart-plus"></i></NavLink>
+                @if (Model.Button != null)
+                {
+                    <a class="btn-theme" asp-controller="product" asp-action="products" asp-route-id="@Model.Id"><i class="fa-solid fa-cart-plus"></i>@Model.Button.Content</a>
+                }
             </div>
         </div>
     </div>

@@ -2,5 +2,9 @@
   {
     "outputFile": "wwwroot/css/scss/app.css",
     "inputFile": "wwwroot/css/scss/app.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/scss/components/_productTile.css",
+    "inputFile": "wwwroot/css/scss/components/_productTile.scss"
   }
 ]
