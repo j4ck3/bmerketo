@@ -1,0 +1,31 @@
+﻿@model CreateProductViewModel
+
+<section class="contact-form">
+    <div class="container">
+        <div class="title mb-4">Create Product</div>
+
+        <form method="POST" asp-action="create" novalidate>
+            <div class="form-group mb-4">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" type="text">
+                <span asp-validation-for="Name"></span>
+            </div>
+            <div class="form-group mb-4">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" type="text"></textarea>
+                <span asp-validation-for="Description"></span>
+            </div>
+            <div class="form-group mb-4">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" type="text">
+                <span asp-validation-for="Price"></span>
+            </div>
+            <div class="form-group mb-4">
+                <label asp-for="OldPrice"></label>
+                <input asp-for="OldPrice" type="text">
+                <span asp-validation-for="OldPrice"></span>
+            </div>
+            <button type="submit" class="btn-theme">Submit</button>
+        </form>
+    </div>
+</section>
