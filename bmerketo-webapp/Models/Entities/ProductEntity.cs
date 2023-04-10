@@ -31,7 +31,6 @@ namespace bmerketo_webapp.Models.Entities
                 Description = createProductViewModel.Description,
                 Price = createProductViewModel.Price,
                 OldPrice = createProductViewModel.OldPrice,
-
             };
         }
     }

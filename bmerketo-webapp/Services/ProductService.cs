@@ -1,4 +1,5 @@
 ﻿using bmerketo_webapp.Contexts;
+using bmerketo_webapp.Models;
 using bmerketo_webapp.Models.Entities;
 using bmerketo_webapp.ViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -30,9 +31,16 @@ public class ProductService
 
     }
 
-    public async Task<IEnumerable<ProductEntity>> GetAllAsync()
+    public async Task<IEnumerable<ProductModel>> GetAllAsync()
     {
-        return await _dataContext.Products.ToListAsync();
+        var products = new List<ProductModel>();
+        var items = await _dataContext.Products.ToListAsync();
+        foreach (var item in items)
+        {
+            ProductModel productModel = item;
+            products.Add(productModel);
+        }
+        return products;
     }
 
 }

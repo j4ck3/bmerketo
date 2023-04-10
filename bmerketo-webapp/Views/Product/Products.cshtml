@@ -1,0 +1,14 @@
+﻿@{
+    var products = await productService.GetAllAsync();
+}
+
+@if (products != null) {
+    foreach(var product in products)
+    {
+        <div class="container">
+            <div class="d-flex justify-content-center align-items-center">
+                <p>@product.Name</p>
+            </div>
+        </div>
+    }
+}

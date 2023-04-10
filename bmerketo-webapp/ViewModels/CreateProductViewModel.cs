@@ -4,12 +4,12 @@ namespace bmerketo_webapp.ViewModels
 {
     public class CreateProductViewModel
     {
-        private string Id = Guid.NewGuid().ToString();
+        public string Id = Guid.NewGuid().ToString();
 
         [Required(ErrorMessage = "Du måste ange ett namn")]
         [MinLength(2, ErrorMessage = "Namnet måsta vara minst {1} bokstäver långt.")]
         [Display(Name = "Produkt namn")]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         [Display(Name = "Beskrivning")]
         public string? Description { get; set; }
