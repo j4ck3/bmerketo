@@ -1,6 +1,9 @@
 ﻿@model ProductTileRowViewModel
-<h3 class="product-tile-row-title">Top selling products in this week</h3>
-<div class="mt-5 row row-cols-md-1 row-cols-lg-4 row-cols-xl-6 g-2 overflow-y-hidden">
+@if (!string.IsNullOrEmpty(Model.Title))
+{
+    <h3 class="product-tile-row-title">@Model.Title</h3>
+}
+<div class="mt-5 row row-cols-md-1 row-cols-lg-4 row-cols-xl-6 g-1">
     @foreach (var item in Model.Items)
     {
         <partial name="/Views/Shared/Partials/Components/_ProductTile.cshtml" model="item" />

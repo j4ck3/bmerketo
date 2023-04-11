@@ -1,8 +1,11 @@
-﻿namespace bmerketo_webapp.ViewModels
+﻿using bmerketo_webapp.Models.Entities;
+using bmerketo_webapp.Models;
+
+namespace bmerketo_webapp.ViewModels
 {
     public class ItemViewModel
     {
-        public string? Id { get; set; }
+        public Guid? Id { get; set; }
         public string? ImageUrl { get; set; }
         public string? Title { get; set; }
         public decimal? Price { get; set; }
@@ -13,5 +16,17 @@
         public int? Comments { get; set; }
         public string? Description { get; set; }
         public ButtonViewModel? Button { get; set; }
+
+        public static implicit operator ItemViewModel(ProductModel model)
+        {
+            return new ItemViewModel
+            {
+                Id = model.Id,
+                Title = model.Name,
+                Description = model.Description,
+                Price = model.Price,
+                OldPrice = model.OldPrice,
+            };
+        }
     }
 }

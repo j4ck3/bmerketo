@@ -1,14 +1,30 @@
 ﻿@{
+    @model ProductsViewModel
     var products = await productService.GetAllAsync();
 }
 
-@if (products != null) {
-    foreach(var product in products)
-    {
-        <div class="container">
-            <div class="d-flex justify-content-center align-items-center">
-                <p>@product.Name</p>
-            </div>
-        </div>
-    }
+@if (!string.IsNullOrEmpty(Model.Title))
+{
+    <h3 class="collection-title">@Model.Title</h3>
 }
+
+<div class="container-fluid mt-5">
+    <div class="mt-5 row row-cols-md-1 row-cols-lg-3 row-cols-xl-5 g-2">
+        @if (products != null) {
+            foreach(var product in products)
+            {
+                ItemViewModel itemViewModel = product;
+                <partial name="/Views/Shared/Partials/Components/_ProductTile.cshtml" model="itemViewModel" />
+            }
+        }
+    </div>
+</div>
+
+@if (Model.Button != null)
+{
+    <button class="loadmore-btn">
+        @Model.Button.Content<i class="fa-solid fa-arrow-rotate-left"></i>
+    </button>
+}
+
+<a class="loadmore-btn" asp-controller="product" asp-action="create">Create New Product</a>

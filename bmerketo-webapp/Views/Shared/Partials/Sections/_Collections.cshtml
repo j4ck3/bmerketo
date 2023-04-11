@@ -15,15 +15,13 @@
 
     @if (!string.IsNullOrEmpty(Model.Title))
     {
-        <h3 class="collection-title">Best Collection</h3>
+        <h3 class="collection-title">@Model.Title</h3>
     }
-
-
 
     @if (Model.GridItems != null)
     {
         <div class="container-xxl mt-5">
-            <div class="mt-5 row row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-4 g-4">
+            <div class="mt-5 row row-cols-md-1 row-cols-lg-3 row-cols-xl-4 g-3">
                 @foreach (var item in Model.GridItems)
                 {
                     <partial name="/Views/Shared/Partials/Components/_ProductTile.cshtml" model="item" />
@@ -31,7 +29,6 @@
             </div>
         </div>
     }
-
 
     @if (Model.LoadMore)
     {
