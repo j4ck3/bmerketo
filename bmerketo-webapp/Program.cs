@@ -16,13 +16,17 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(x =>
     x.SignIn.RequireConfirmedEmail = false;
 
     x.Password.RequiredLength = 8;
-}).AddEntityFrameworkStores<IdentityContext>();
+})  
+    .AddEntityFrameworkStores<IdentityContext>()
+    .AddClaimsPrincipalFactory<CustomClaimsService>();
 
 
 
 builder.Services.AddScoped<ProductService>();
-builder.Services.AddScoped<SeedService>();
+builder.Services.AddScoped<RolesService>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<UserService>();
+
 
 var app = builder.Build();
 

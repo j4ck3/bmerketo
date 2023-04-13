@@ -14,23 +14,21 @@ public class AuthService
     private readonly UserManager<IdentityUser> _userManager;
     private readonly IdentityContext _identityContext;
     private readonly SignInManager<IdentityUser> _signInManager;
-    private readonly SeedService _seedService;
-    private readonly RoleManager<IdentityRole> _roleManager;
+    private readonly RolesService _rolesService;
 
-    public AuthService(UserManager<IdentityUser> userManager, IdentityContext identityContext, SignInManager<IdentityUser> signInManager, SeedService seedService, RoleManager<IdentityRole> roleManager)
+    public AuthService(UserManager<IdentityUser> userManager, IdentityContext identityContext, SignInManager<IdentityUser> signInManager, RolesService seedService)
     {
         _userManager = userManager;
         _identityContext = identityContext;
         _signInManager = signInManager;
-        _seedService = seedService;
-        _roleManager = roleManager;
+        _rolesService = seedService;
     }
 
     public async Task<bool> RegisterAsync(CreateUserViewModel model)
     {
         try
         {
-            await _seedService.SeedRoles();
+            await _rolesService.SeedRoles();
             var roleName = "user";
 
             if (!await _userManager.Users.AnyAsync())

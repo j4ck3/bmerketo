@@ -2,11 +2,11 @@
 
 namespace bmerketo_webapp.Services;
 
-public class SeedService
+public class RolesService
 {
     private readonly RoleManager<IdentityRole> _roleManager;
 
-    public SeedService(RoleManager<IdentityRole> roleManager)
+    public RolesService(RoleManager<IdentityRole> roleManager)
     {
         _roleManager = roleManager;
     }
@@ -15,6 +15,8 @@ public class SeedService
     {
         if (!await _roleManager.RoleExistsAsync("admin"))
             await _roleManager.CreateAsync(new IdentityRole("admin"));
+        if (!await _roleManager.RoleExistsAsync("user"))
+            await _roleManager.CreateAsync(new IdentityRole("user"));
     } 
 
 }
