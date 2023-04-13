@@ -1,6 +1,5 @@
 ﻿using bmerketo_webapp.Models.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography.X509Certificates;
 
 namespace bmerketo_webapp.Contexts
 {

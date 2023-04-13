@@ -9,8 +9,16 @@
             </nav>
             <nav class="menu-icons">
                 <a class="link" asp-controller="product" asp-action="search"><i class="fa-solid fa-search"></i></a>
-                <a class="link" asp-controller="account" asp-action="login">Login</a>
-                <a class="link" asp-controller="account" asp-action="register">Register</a>
+                 @if (signInManager.IsSignedIn(User))
+                {
+                    <span>@User.Identity?.Name</span>
+                    <a class="link" asp-controller="Logout" asp-action="Index">Login</a>
+                }
+                else
+                {
+                    <a class="link" asp-controller="account" asp-action="login">Login</a>
+                    <a class="link" asp-controller="account" asp-action="register">Register</a>
+                }
                 <a class="link" asp-controller="cart" asp-action="index"><i class="fa-solid fa-cart-shopping"></i></a>
             </nav>
         </menu>

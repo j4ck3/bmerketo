@@ -1,16 +1,17 @@
-﻿<section class="contact-form">
+﻿@model LoginViewModel
+<section class="contact-form">
     <div class="container">
         <div class="title mb-3">Please Login to Your Account</div>
-        <form id="register-form" novalidate>
+        <form id="register-form" method="POST" novalidate>
             <div class="email form-group">
-                <label for="email">Email*</label>
-                <input id="email" class="invalid"></>
-                <span class="error">Email is required</span>
+                <label asp-for="Email"></label>
+                <input asp-for="Email" id="email">
+                <span asp-validation-for="Email" class="error"></span>
             </div>
             <div class="password form-group">
-                <label for="password">Password*</label>
-                <input id="password" class="invalid"></>
-                <span class="error">Password is required</span>
+                <label asp-for="Password"></label>
+                <input asp-for="Password" type="password" id="password">
+                <span asp-validation-for="Password" class="error"></span>
             </div>
             <div class="terms form-checkbox-group">
                 <label class="custom-checkbox">
