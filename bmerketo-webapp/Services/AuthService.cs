@@ -9,8 +9,6 @@ namespace bmerketo_webapp.Services;
 
 public class AuthService
 {
-
-
     private readonly UserManager<IdentityUser> _userManager;
     private readonly IdentityContext _identityContext;
     private readonly SignInManager<IdentityUser> _signInManager;
@@ -77,5 +75,4 @@ public class AuthService
         await _signInManager.SignOutAsync();
         return _signInManager.IsSignedIn(user);
     }
-
 }

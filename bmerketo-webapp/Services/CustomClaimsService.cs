@@ -15,12 +15,11 @@ public class CustomClaimsService : UserClaimsPrincipalFactory<IdentityUser>
 
     protected override async Task<ClaimsIdentity> GenerateClaimsAsync(IdentityUser user)
     {
-
         var claimsIdentity = await base.GenerateClaimsAsync(user);
 
         var userProfileEntity = await _userService.Get(user.Id);
 
-        claimsIdentity.AddClaim(new Claim("DisplayName", $"{userProfileEntity.FistName} {userProfileEntity.LastName}"));
+        claimsIdentity.AddClaim(new Claim("DisplayName", $"{userProfileEntity.FistName} {userProfileEntity.LastName} {userProfileEntity.Address.StreetName}"));
 
         return claimsIdentity;
     }
