@@ -20,14 +20,14 @@ public class AddressEntity
 
     [Column(TypeName = "nvarchar(50)")]
     [StringLength(50)]
-    public string? StreetName { get; set; }
+    public string StreetName { get; set; } = null!;
 
 
     [Column(TypeName = "char(6)")]
-    public string? PostalCode { get; set; }
+    public string PostalCode { get; set; } = null!;
 
 
     [Column(TypeName = "nvarchar(50)")]
     [StringLength(50)]
-    public string? City { get; set; }
+    public string City { get; set; } = null!;
 }

@@ -11,8 +11,8 @@
                 <a class="link" asp-controller="product" asp-action="search"><i class="fa-solid fa-search"></i></a>
                  @if (signInManager.IsSignedIn(User))
                 {
-                    <span>@User.Identity?.Name</span>
-                    <a class="link" asp-controller="Logout" asp-action="Index">Login</a>
+                    <a class="link" asp-controller="account" asp-action="Index">@User.Identity?.Name</a>
+                    <a class="link" asp-controller="account" asp-action="signout">Logout</a>
                 }
                 else
                 {

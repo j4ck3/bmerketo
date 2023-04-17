@@ -1,5 +1,46 @@
 ﻿<partial name="../Shared/Partials/Sections/_Banner" />
-<partial name="../Shared/Partials/Sections/Forms/_ContactForm.cshtml" />
+@model ContactFormViewModel
+<section class="contact-form">
+    <div class="container">
+        <div class="title mb-3">Write something</div>
+
+        <form id="contact-form" method="POST" novalidate>
+            <div class="name form-group mb-3">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName">
+                <span asp-validation-for="FirstName" class="error"></span>
+            </div>
+            <div class="email form-group mb-3">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" type="email">
+                <span asp-validation-for="Email" class="error"></span>
+            </div>
+            <div class="phoneNumber form-group mb-3">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber">
+                <span asp-validation-for="PhoneNumber" class="error"></span>
+            </div>
+            <div class="companyName form-group mb-3">
+                <label asp-for="Company"></label>
+                <input asp-for="Company">
+                <span asp-validation-for="Company" class="error"></span>
+            </div>
+            <div class="message form-group mb-3">
+                <label asp-for="Message"></label>
+                <input asp-for="Message">
+                <span asp-validation-for="Message" class="error"></span>
+            </div>
+            <div class="terms form-checkbox-group mb-3">
+                <label class="custom-checkbox">
+                    Save my name, email in the this browser for the next time I comment.
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <button class="btn-theme">Submit</button>
+        </form>
+    </div>
+</section>
 <section class="map">
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.846379992451!2d18.021943310261673!3d59.34492585222009!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f9d9d263b022d%3A0x82fc0f30ed84f9ed!2sNackademin!5e0!3m2!1ssv!2sse!4v1679451477145!5m2!1ssv!2sse" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </section>

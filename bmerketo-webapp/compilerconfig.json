@@ -6,5 +6,9 @@
   {
     "outputFile": "wwwroot/css/scss/components/_productTile.css",
     "inputFile": "wwwroot/css/scss/components/_productTile.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/scss/sections/forms/_contactForm.css",
+    "inputFile": "wwwroot/css/scss/sections/forms/_contactForm.scss"
   }
 ]

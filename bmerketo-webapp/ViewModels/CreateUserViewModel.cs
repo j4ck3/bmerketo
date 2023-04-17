@@ -1,6 +1,5 @@
 ﻿using bmerketo_webapp.Models.Entities;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.Protocols;
 using System.ComponentModel.DataAnnotations;
 
 namespace bmerketo_webapp.ViewModels;
@@ -49,7 +48,6 @@ public class CreateUserViewModel
 
     public static implicit operator IdentityUser(CreateUserViewModel createUserViewModel)
     {
-        
         return new IdentityUser
         {
             UserName = createUserViewModel.Email,

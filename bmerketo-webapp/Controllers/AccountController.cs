@@ -69,7 +69,7 @@ public class AccountController : Controller
 
 
 
-    [HttpPost]
+    [HttpGet]
     [Authorize]
     public new async Task<IActionResult> SignOut()
     {

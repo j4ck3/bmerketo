@@ -19,7 +19,7 @@ public class CustomClaimsService : UserClaimsPrincipalFactory<IdentityUser>
 
         var userProfileEntity = await _userService.Get(user.Id);
 
-        claimsIdentity.AddClaim(new Claim("DisplayName", $"{userProfileEntity.FistName} {userProfileEntity.LastName} {userProfileEntity.Address.StreetName}"));
+        claimsIdentity.AddClaim(new Claim("DisplayName", $"{userProfileEntity.FistName} {userProfileEntity.LastName}"));
 
         return claimsIdentity;
     }

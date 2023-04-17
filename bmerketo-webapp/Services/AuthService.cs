@@ -26,6 +26,7 @@ public class AuthService
     {
         try
         {
+            // ------- Init roles, Create user and give user a role
             await _rolesService.SeedRoles();
             var roleName = "user";
 
@@ -34,21 +35,35 @@ public class AuthService
 
             IdentityUser identityUser = model;
             await _userManager.CreateAsync(identityUser, model.Password);
-
             await _userManager.AddToRoleAsync(identityUser, roleName);
 
+
+            // ------- Sets userProfileEntity.UserId from identityUser Id
             UserProfileEntity userProfileEntity = model;
             userProfileEntity.UserId = identityUser.Id;
 
+
+            // ------- Check if address exists. If not create a new AddressEntity and later save it to db
+            var _addressEntity = await _identityContext.Addresses.FirstOrDefaultAsync(x => x.StreetName == model.StreetName && x.PostalCode == model.PostalCode && x.City == model.City);
+            if (_addressEntity != null)
+                userProfileEntity.AddressId = _addressEntity.Id;
+            else
+                userProfileEntity.Address = new Models.Entities.AddressEntity
+                {
+                    UserId = userProfileEntity.UserId,
+                    StreetName = model.StreetName,
+                    PostalCode = model.PostalCode,
+                    City = model.City
+                };
+
+
+            // ------- Save UserProfile
             _identityContext.UserProfiles.Add(userProfileEntity);
             await _identityContext.SaveChangesAsync();
 
             return true;
         }
-        catch
-        {
-            return false;
-        }
+        catch { return false; }
     }
 
     public async Task<bool> FindAsync(CreateUserViewModel model)
