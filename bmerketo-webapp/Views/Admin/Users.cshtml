@@ -12,17 +12,17 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Full Name</th>
                         <th>Email</th>
                         <th>Street Name</th>
-                        <th>Roles</th>
-                        <th>Actions</th>
+                        <th>Role(s)</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr>
-                        @foreach (var user in users) {
+                    @foreach (var user in users)
+                    {
+                        <tr>
                             <td>@user.FirstName @user.LastName</td>
                             <td>@user.Email</td>
                             <td>
@@ -30,7 +30,7 @@
                                     {
                                         @user.Address.StreetName 
                                     }
-                             </td>
+                                </td>
                             <td>
                                 @if(user.Roles != null) {
                                     @foreach (var role in user.Roles)
@@ -43,8 +43,8 @@
                                 <a class="admin-nav-link" asp-controller="admin" asp-action="edituser"><i class="fa-solid fa-user-pen"></i> Edit user</a>
                                 <a class="admin-nav-link" asp-controller="admin" asp-action="deleteuser"><i class="fa-solid fa-user-xmark"></i> Delete user</a>
                             </td>
-                        }
-                    </tr>
+                        </tr>
+                    }
                 </tbody>
             </table>
         }
