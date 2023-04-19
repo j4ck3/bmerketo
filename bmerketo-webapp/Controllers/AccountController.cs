@@ -32,15 +32,15 @@ public class AccountController : Controller
     {
         if (ModelState.IsValid)
         {
-            if (await _authService.FindAsync(viewModel)){
+            if (!await _authService.FindAsync(viewModel))
+            {
                 if (await _authService.RegisterAsync(viewModel))
                     return RedirectToAction("Index");
-
-                ModelState.AddModelError("", "Something went wrong when trying to register");
-                return View(viewModel);
+                else
+                    ModelState.AddModelError("", "Something went wrong when trying to register");
             }
-
-            ModelState.AddModelError("", "A User with the same e-mail address already exists");
+            else
+                ModelState.AddModelError("", "A User with the same e-mail address already exists");
         }
         return View(viewModel);
     }
@@ -51,7 +51,6 @@ public class AccountController : Controller
         ViewData["Title"] = "Login";
         return View();
     }
-
 
 
     [HttpPost]
@@ -66,7 +65,6 @@ public class AccountController : Controller
         }
         return View(viewModel);
     }
-
 
 
     [HttpGet]

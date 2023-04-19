@@ -16,7 +16,7 @@ public class UserProfileEntity
     [ProtectedPersonalData]
     [Column(TypeName = "nvarchar(50)")]
     [StringLength(50)]
-    public string FistName { get; set; } = null!;
+    public string FirstName { get; set; } = null!;
 
     [ProtectedPersonalData]
     [Column(TypeName = "nvarchar(50)")]
@@ -30,5 +30,5 @@ public class UserProfileEntity
 
     [ForeignKey("Address")]
     public int? AddressId { get; set; }
-    public virtual AddressEntity Address { get; set; } = null!;
+    public virtual AddressEntity? Address { get; set; }
 }

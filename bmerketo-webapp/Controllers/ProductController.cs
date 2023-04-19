@@ -42,25 +42,5 @@ namespace bmerketo_webapp.Controllers
             return View(viewmodel);
         }
 
-        [HttpGet]
-        public IActionResult Create()
-        {
-            ViewData["Title"] = "Create Product";
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(CreateProductViewModel createProductViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                if (await _productService.CreateAsync(createProductViewModel))
-                    return RedirectToAction("Products", "Product");
-
-                ModelState.AddModelError("", "Something went wrong while trying to create the product");
-            }
-            return View();
-        }
-
     }
 }

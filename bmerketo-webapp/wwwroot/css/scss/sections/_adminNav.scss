@@ -1,0 +1,29 @@
+﻿.admin-nav {
+    position: fixed;
+    left: 0px;
+    height: 100%;
+    width: 80px;
+    background: rgb(9,0,163);
+    background: linear-gradient(8deg, rgba(9,0,163,1) 0%, rgba(9,9,121,1) 35%, rgba(0,132,255,1) 100%);
+    display: flex;
+    justify-content: center;
+
+    .admin-nav-body {
+        margin-top: 300px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .admin-nav-link {
+        margin-bottom: 2rem;
+        i {
+            color: white;
+            font-size:16px;
+            padding: 15px;
+            border-radius: 5px;
+            &:hover {
+                background-color: rgba(0, 0, 0, .3);
+            }
+        }
+    }
+}

@@ -22,7 +22,7 @@ public class CreateUserViewModel
     public string Email { get; set; } = null!;
 
     [Required(ErrorMessage = "You must enter a password. Minmum length: 8, Atleast 1 upppercase letter")]
-    [MinLength(8, ErrorMessage = "Password is too short.")]
+    [MinLength(8, ErrorMessage = "You must enter a password. Minmum length: 8, Atleast 1 upppercase letter")]
     [Display(Name = "Password")]
     [DataType(DataType.Password)]
     public string Password { get; set; } = null!;
@@ -60,7 +60,7 @@ public class CreateUserViewModel
     {
         return new UserProfileEntity
         {
-            FistName = createUserViewModel.FirstName,
+            FirstName = createUserViewModel.FirstName,
             LastName = createUserViewModel.LastName,
             Company = createUserViewModel.Company,
             Address = new Models.Entities.AddressEntity
@@ -71,4 +71,5 @@ public class CreateUserViewModel
             }
         };
     }
+
 }

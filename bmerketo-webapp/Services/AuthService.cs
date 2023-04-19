@@ -43,19 +43,28 @@ public class AuthService
             userProfileEntity.UserId = identityUser.Id;
 
 
-            // ------- Check if address exists. If not create a new AddressEntity and later save it to db
-            var _addressEntity = await _identityContext.Addresses.FirstOrDefaultAsync(x => x.StreetName == model.StreetName && x.PostalCode == model.PostalCode && x.City == model.City);
-            if (_addressEntity != null)
-                userProfileEntity.AddressId = _addressEntity.Id;
-            else
-                userProfileEntity.Address = new Models.Entities.AddressEntity
+            // ------- Check if address exists. If: assign found addressEntity.Id to userProfile.AddressId  If Not: create a new AddressEntity and later save it to db
+            if (model.StreetName != null && model.PostalCode != null && model.City != null)
+            {
+                var _addressEntity = await _identityContext.Addresses.FirstOrDefaultAsync(x => x.StreetName == model.StreetName && x.PostalCode == model.PostalCode && x.City == model.City);
+                if (_addressEntity != null)
                 {
-                    UserId = userProfileEntity.UserId,
-                    StreetName = model.StreetName,
-                    PostalCode = model.PostalCode,
-                    City = model.City
-                };
-
+                    userProfileEntity.AddressId = _addressEntity.Id;
+                    userProfileEntity.Address = null!;
+                }
+                else
+                    userProfileEntity.Address = new Models.Entities.AddressEntity
+                    {
+                        StreetName = model.StreetName,
+                        PostalCode = model.PostalCode,
+                        City = model.City
+                    };
+            }
+            else
+            {
+                userProfileEntity.AddressId = null!;
+                userProfileEntity.Address = null!;
+            }
 
             // ------- Save UserProfile
             _identityContext.UserProfiles.Add(userProfileEntity);
@@ -70,7 +79,7 @@ public class AuthService
     {
         var _user = await _userManager.FindByEmailAsync(model.Email);
 
-        if (_user == null)
+        if (_user != null)
             return true;
         return false;
     }

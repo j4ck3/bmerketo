@@ -10,5 +10,9 @@
   {
     "outputFile": "wwwroot/css/scss/sections/forms/_contactForm.css",
     "inputFile": "wwwroot/css/scss/sections/forms/_contactForm.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/scss/sections/_adminNav.css",
+    "inputFile": "wwwroot/css/scss/sections/_adminNav.scss"
   }
 ]

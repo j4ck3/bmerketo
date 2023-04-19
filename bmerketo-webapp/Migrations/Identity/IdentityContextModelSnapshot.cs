@@ -17,7 +17,7 @@ namespace bmerketo_webapp.Migrations.Identity
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -239,13 +239,7 @@ namespace bmerketo_webapp.Migrations.Identity
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Addresses");
                 });
@@ -256,14 +250,13 @@ namespace bmerketo_webapp.Migrations.Identity
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("AddressId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Company")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("FistName")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -331,24 +324,11 @@ namespace bmerketo_webapp.Migrations.Identity
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("bmerketo_webapp.Models.Entities.AddressEntity", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("bmerketo_webapp.Models.Entities.UserProfileEntity", b =>
                 {
                     b.HasOne("bmerketo_webapp.Models.Entities.AddressEntity", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()

@@ -82,11 +82,4 @@ public class HomeController : Controller
         };
         return View(viewModel);
     }
-
-    public IActionResult Contact()
-    {
-
-        ViewData["Title"] = "Contact";
-        return View();
-    }
 }

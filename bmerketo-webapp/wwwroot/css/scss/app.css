@@ -317,6 +317,34 @@ header .toggle .btn-white {
   border-radius: 5px;
 }
 
+.admin-nav {
+  position: fixed;
+  left: 0px;
+  height: 100%;
+  width: 80px;
+  background: rgb(9, 0, 163);
+  background: linear-gradient(8deg, rgb(9, 0, 163) 0%, rgb(9, 9, 121) 35%, rgb(0, 132, 255) 100%);
+  display: flex;
+  justify-content: center;
+}
+.admin-nav .admin-nav-body {
+  margin-top: 300px;
+  display: flex;
+  flex-direction: column;
+}
+.admin-nav .admin-nav-link {
+  margin-bottom: 2rem;
+}
+.admin-nav .admin-nav-link i {
+  color: white;
+  font-size: 16px;
+  padding: 15px;
+  border-radius: 5px;
+}
+.admin-nav .admin-nav-link i:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 .contact-form {
   margin-top: 170px;
 }

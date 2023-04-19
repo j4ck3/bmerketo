@@ -1,0 +1,52 @@
+﻿@{
+    var users = await userService.GetAllAsync();
+}
+
+<partial name="/Views/Shared/Partials/Sections/_AdminNav.cshtml" />
+
+<div class="container d-flex justify-content-center align-items-center mt-5">
+    <div class="content-list mt-5">
+        <h3 class="collection-title">Users</h3>
+        @if (users != null)
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Street Name</th>
+                        <th>Roles</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        @foreach (var user in users) {
+                            <td>@user.FirstName @user.LastName</td>
+                            <td>@user.Email</td>
+                            <td>
+                                @if (user.Address != null)
+                                    {
+                                        @user.Address.StreetName 
+                                    }
+                             </td>
+                            <td>
+                                @if(user.Roles != null) {
+                                    @foreach (var role in user.Roles)
+                                    {
+                                        @role
+                                    }
+                                }
+                            </td>
+                            <td>
+                                <a class="admin-nav-link" asp-controller="admin" asp-action="edituser"><i class="fa-solid fa-user-pen"></i> Edit user</a>
+                                <a class="admin-nav-link" asp-controller="admin" asp-action="deleteuser"><i class="fa-solid fa-user-xmark"></i> Delete user</a>
+                            </td>
+                        }
+                    </tr>
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
