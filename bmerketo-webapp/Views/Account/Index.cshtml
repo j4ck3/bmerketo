@@ -12,10 +12,13 @@
             {
             <div class="me-5">
                 <img src="~/imgs/placeholders/profile-placeholder.png" alt="profile" />
-                <div class="mt-3">
-                    <div class="profile-address-text text-center mb-1">@user.Address?.StreetName</div>
-                    <div class="profile-address-text text-center">@user.Address?.City, @user.Address?.PostalCode</div>
-                </div>
+                @if (user.Address != null)
+                {
+                    <div class="mt-3">
+                        <div class="profile-address-text text-center mb-1">@user.Address?.StreetName</div>
+                        <div class="profile-address-text text-center">@user.Address?.City, @user.Address?.PostalCode</div>
+                    </div>
+                }
             </div>
 
             <div class="profile-content">
@@ -30,9 +33,12 @@
                 <p class="profile-email mt-3">@user.User.UserName</p>
                 <a class="profile-button mb-3" asp-controller="account" asp-action="index">Edit Account</a>
                 <a class="profile-button" asp-controller="account" asp-action="signout">Log Out</a>
-            </div>
+                </div>
+            }else
+            {
+                <p class="profile-email mt-3">You are not signed in</p>
+                <a class="profile-button mb-3" asp-controller="account" asp-action="login">Signin here</a>
             }
-           
         </div>
     </div>
 </div>

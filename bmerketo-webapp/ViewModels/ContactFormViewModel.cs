@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using bmerketo_webapp.Models.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace bmerketo_webapp.ViewModels;
 
@@ -23,6 +24,19 @@ public class ContactFormViewModel
     [Display(Name = "Message")]
     [Required(ErrorMessage = "You must enter a Message")]
     public string Message { get; set; } = null!;
+
+
+    public static implicit operator ContactFormEntity(ContactFormViewModel viewModel)
+    {
+        return new ContactFormEntity
+        {
+            FirstName = viewModel.FirstName,
+            Email = viewModel.Email,
+            PhoneNumber = viewModel.PhoneNumber,
+            Company = viewModel.Company,
+            Message = viewModel.Message,
+        };
+    }
 }
 
 

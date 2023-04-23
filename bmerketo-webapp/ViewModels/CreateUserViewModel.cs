@@ -26,6 +26,8 @@ public class CreateUserViewModel
     [Display(Name = "Password")]
     [DataType(DataType.Password)]
     public string Password { get; set; } = null!;
+
+    [Display(Name = "Phone Number")]
     public string? PhoneNumber { get; set; }
 
     [Required(ErrorMessage = "You must confirm your password.")]

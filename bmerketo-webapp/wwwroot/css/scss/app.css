@@ -321,9 +321,8 @@ header .toggle .btn-white {
   position: fixed;
   left: 0px;
   height: 100%;
-  width: 80px;
-  background: rgb(9, 0, 163);
-  background: linear-gradient(8deg, rgb(9, 0, 163) 0%, rgb(9, 9, 121) 35%, rgb(0, 132, 255) 100%);
+  width: 90px;
+  background-color: #292929;
   display: flex;
   justify-content: center;
 }
@@ -339,10 +338,12 @@ header .toggle .btn-white {
   color: white;
   font-size: 16px;
   padding: 15px;
-  border-radius: 5px;
+  border-radius: 2px;
+  background-color: #FA3150;
+  transition: transform 0.1s ease-in-out;
 }
 .admin-nav .admin-nav-link i:hover {
-  background-color: rgba(0, 0, 0, 0.3);
+  transform: scale(1.15);
 }
 
 .contact-form {

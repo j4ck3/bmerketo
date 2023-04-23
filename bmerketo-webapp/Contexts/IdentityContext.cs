@@ -12,6 +12,7 @@ namespace bmerketo_webapp.Contexts
 
         public DbSet<UserProfileEntity> UserProfiles { get; set; }
         public DbSet<AddressEntity> Addresses { get; set; }
+        public DbSet<ContactFormEntity> ContactForm { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
