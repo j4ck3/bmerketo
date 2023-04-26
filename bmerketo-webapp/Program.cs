@@ -1,4 +1,5 @@
 using bmerketo_webapp.Contexts;
+using bmerketo_webapp.Repos;
 using bmerketo_webapp.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(x =>
 {
     x.User.RequireUniqueEmail = true;
     x.SignIn.RequireConfirmedEmail = false;
-
+    x.SignIn.RequireConfirmedAccount = false;
     x.Password.RequiredLength = 8;
 })  
     .AddEntityFrameworkStores<IdentityContext>()
@@ -23,9 +24,12 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(x =>
 
 
 builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<ProductCategoryService>();
 builder.Services.AddScoped<RolesService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<ProductCategoryRepo>();
+builder.Services.AddScoped<ProductRepo>();
 
 
 var app = builder.Build();

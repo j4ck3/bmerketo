@@ -23,15 +23,24 @@ namespace bmerketo_webapp.Models.Entities
         [Column(TypeName = "money")]
         public decimal? OldPrice { get; set; }
 
-        public static implicit operator ProductEntity(CreateProductViewModel createProductViewModel)
+        [ForeignKey("Category")]
+        public string CategoryId { get; set; } = null!;
+
+        public ProductCategoryEntity Category { get; set; } = null!;
+
+        public string? ImageUrl { get; set; }
+
+        public static implicit operator ItemViewModel(ProductEntity entity)
         {
-            return new ProductEntity
+            return new ItemViewModel
             {
-                Name = createProductViewModel.Name,
-                Description = createProductViewModel.Description,
-                Price = createProductViewModel.Price,
-                OldPrice = createProductViewModel.OldPrice,
+                Title = entity.Name,
+                Description = entity.Description,
+                Price = entity.Price,
+                OldPrice = entity.OldPrice,
+                Category = entity.Category.CategoryName,
             };
         }
+
     }
 }

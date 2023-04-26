@@ -1,5 +1,4 @@
-﻿using bmerketo_webapp.Services;
-using bmerketo_webapp.ViewModels;
+﻿using bmerketo_webapp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace bmerketo_webapp.Controllers

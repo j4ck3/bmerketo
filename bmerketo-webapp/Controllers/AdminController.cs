@@ -1,12 +1,10 @@
-﻿using bmerketo_webapp.Services;
+﻿using bmerketo_webapp.Models;
+using bmerketo_webapp.Services;
 using bmerketo_webapp.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace bmerketo_webapp.Controllers;
 
-
-[Authorize(Roles = "Admin")]
 public class AdminController : Controller
 {
 
@@ -50,12 +48,6 @@ public class AdminController : Controller
     }
 
 
-
-
-
-
-
-
     [HttpPost]
     public async Task<IActionResult> CreateUser(CreateUserViewModel viewModel)
     {
@@ -64,27 +56,30 @@ public class AdminController : Controller
             if (!await _authService.FindAsync(viewModel))
             {
                 if (await _authService.RegisterAsync(viewModel))
-                    return RedirectToAction("users", "admin");
+                    return RedirectToAction("users");
 
                 ModelState.AddModelError("", "Something went wrong when trying to create the user");
                 return View(viewModel);
             }
-
             ModelState.AddModelError("", "A User with the same e-mail address already exists");
         }
         return View(viewModel);
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateProduct(CreateProductViewModel createProductViewModel)
+    public async Task<IActionResult> CreateProduct(CreateProductFormModel viewModel)
     {
         if (ModelState.IsValid)
         {
-            if (await _productService.CreateAsync(createProductViewModel))
-                return RedirectToAction("products", "admin");
+            if (await _productService.CreateAsync(viewModel))
+                return RedirectToAction("products");
 
             ModelState.AddModelError("", "Something went wrong while trying to create the product");
         }
-        return View();
-    }
+        
+        else 
+             ModelState.AddModelError("", "Please Validate the form");
+
+        return View(viewModel);
+    }     
 }

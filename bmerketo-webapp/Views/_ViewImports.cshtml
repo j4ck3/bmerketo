@@ -6,8 +6,10 @@
 @using bmerketo_webapp.Services
 @using bmerketo_webapp.Models
 @using bmerketo_webapp.Models.Entities
+@using bmerketo_webapp.Repos
 
 @inject SignInManager<IdentityUser> signInManager
 @inject UserService userService
 @inject UserManager<IdentityUser> userManager
 @inject ProductService productService
+@inject ProductCategoryService productCategoryService 
