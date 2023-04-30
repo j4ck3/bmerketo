@@ -1,44 +1,48 @@
 ﻿@{
     var userId = User.FindFirst("Id")?.Value;
-    UserProfileEntity user = await userService.GetAsync(userId);
+    UserProfileEntity user = await userService.GetAsync(userId!);
     var userRoles = await userManager.GetRolesAsync(user.User);
 }
 
-
-<div class="profile-container">
-    <div class="container">
-        <div class="profile-content d-flex flex-direction-row justify-content-center">
-            @if (signInManager.IsSignedIn(User))
-            {
-            <div class="me-5">
-                <img src="~/imgs/placeholders/profile-placeholder.png" alt="profile" />
-                @if (user.Address != null)
+@if(user != null)
+{
+    <div class="profile-container">
+        <div class="container">
+            <div class="profile-content d-flex flex-direction-row justify-content-center">
+                @if (signInManager.IsSignedIn(User))
                 {
-                    <div class="mt-3">
-                        <div class="profile-address-text text-center mb-1">@user.Address?.StreetName</div>
-                        <div class="profile-address-text text-center">@user.Address?.City, @user.Address?.PostalCode</div>
+                    <div class="me-5">
+                        <img src="~/imgs/placeholders/profile-placeholder.png" alt="profile" />
+                        @if (user.Address != null)
+                        {
+                            <div class="mt-3">
+                                <div class="profile-address-text text-center mb-1">@user.Address?.StreetName</div>
+                                <div class="profile-address-text text-center">@user.Address?.City, @user.Address?.PostalCode</div>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="profile-content">
+                        <span class="profile-name me-2">@User.FindFirst("DisplayName")?.Value</span>
+                        @if (userRoles != null)
+                        {
+                            @foreach (var role in userRoles)
+                            {
+                                <span class="me-1 profile-role">@role</span>
+                            }
+                        }
+                        <p class="profile-email mt-3">@user.User.UserName</p>
+                        <a class="profile-button mb-3" asp-controller="account" asp-action="index">Edit Account</a>
+                        <a class="profile-button" asp-controller="account" asp-action="signout">Log Out</a>
                     </div>
                 }
-            </div>
-
-            <div class="profile-content">
-                <span class="profile-name me-2">@User.FindFirst("DisplayName")?.Value</span>
-                @if (userRoles != null)
+                else
                 {
-                    @foreach (var role in userRoles)
-                    {
-                        <span class="me-1 profile-role">@role</span>
-                    }
+                    <p class="profile-email mt-3">You are not signed in</p>
+                    <a class="profile-button mb-3" asp-controller="account" asp-action="login">Signin here</a>
                 }
-                <p class="profile-email mt-3">@user.User.UserName</p>
-                <a class="profile-button mb-3" asp-controller="account" asp-action="index">Edit Account</a>
-                <a class="profile-button" asp-controller="account" asp-action="signout">Log Out</a>
-                </div>
-            }else
-            {
-                <p class="profile-email mt-3">You are not signed in</p>
-                <a class="profile-button mb-3" asp-controller="account" asp-action="login">Signin here</a>
-            }
+            </div>
         </div>
     </div>
-</div>
+
+}

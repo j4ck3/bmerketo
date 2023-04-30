@@ -4,7 +4,7 @@
     {
         public string? Title { get; set; }
         public IEnumerable<string>? Categories { get; set; }
-        public IEnumerable<ItemViewModel> GridItems { get; set; } = null!;
+        public IEnumerable<ItemViewModel>? GridItems { get; set; } = null!;
         public bool LoadMore { get; set; } = false;
     }
 }

@@ -47,4 +47,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\imgs\ProductsImgs\" />
+  </ItemGroup>
+
 </Project>

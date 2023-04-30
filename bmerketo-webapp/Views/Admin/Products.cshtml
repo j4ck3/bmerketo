@@ -1,5 +1,5 @@
 ﻿@{
-    var users = await productService.GetAllAsync();
+    var products = await productService.GetAllAsync("");
 }
 
 <partial name="/Views/Shared/Partials/Sections/_AdminNav.cshtml" />
@@ -7,34 +7,36 @@
 <div class="container d-flex justify-content-center align-items-center mt-5">
     <div class="content-list mt-5">
         <h3 class="collection-title">Products</h3>
-        @if (users != null)
+        @if (products.Any())
         {
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Desc.</th>
-                            <th>Price</th>
-                            <th>Old Price</th>
-                        </tr>
-                    </thead>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Desc.</th>
+                        <th>Price</th>
+                        <th>Old Price</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
 
-                    <tbody>
-                    @foreach (var user in users)
-                    {
-                        <tr>
-                            <td>@user.Name</td>
-                            <td>@user.Description</td>
-                            <td>@user.Price</td>
-                            <td>@user.OldPrice</td>
-                            <td>
-                                <a class="admin-nav-link" asp-controller="admin" asp-action="edituser"><i class="fa-solid fa-user-pen"></i> Edit</a>
-                                <a class="admin-nav-link" asp-controller="admin" asp-action="deleteuser"><i class="fa-solid fa-user-xmark"></i> Delete</a>
-                            </td>
-                        </tr>
-                    }
-                    </tbody>
-                </table>
+                <tbody>
+                @foreach (var product in products)
+                {
+                    <tr>
+                        <td>@product.Title</td>
+                        <td>@product.Description</td>
+                        <td>@product.Price</td>
+                        <td>@product.OldPrice</td>
+                        <td>@product.Category?.CategoryName</td>
+                        <td>
+                            <a class="admin-nav-link" asp-controller="admin" asp-action="edituser"><i class="fa-solid fa-user-pen"></i> Edit</a>
+                            <a class="admin-nav-link" asp-controller="admin" asp-action="deleteuser"><i class="fa-solid fa-user-xmark"></i> Delete</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
         }
     </div>
 </div>

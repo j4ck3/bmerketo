@@ -2,9 +2,12 @@
 <div class="col d-flex justify-content-center mb-4">
     <div class="card">
         <div class="product-tile-xl-body">
-            <div class="model-item-body-big">
-                <img class="model-item-img w-100" src="imgs/placeholders/369x310.svg" alt="product" />
-            </div>
+            <a class="model-item-body-big" asp-controller="product" asp-route-id="@Model.Id">
+                    @if (Model.ImageUrl != null)
+                    {
+                       <img class="model-item-img w-100" src="@Model.ImageUrl" alt="@Model.Title" />  
+                    }
+            </a>
             <div class="d-flex justify-content-between align-items-end m-3">
                 <div>
                     <h4 class="product-tile-title">@Model.Title</h4>

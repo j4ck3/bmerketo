@@ -41,4 +41,5 @@ const buttonClickDec = () => {
 const productColapse = document.querySelectorAll("#productColapse");
 const toggleColapse = (i) => {
     productColapse[i].classList.toggle("active")
+    productColapse[i].classList.toggle("product-colapse-toggle-active")
 }

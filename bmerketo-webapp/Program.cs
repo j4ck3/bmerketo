@@ -30,6 +30,7 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ProductCategoryRepo>();
 builder.Services.AddScoped<ProductRepo>();
+builder.Services.AddScoped<HomeViewService>();
 
 
 var app = builder.Build();

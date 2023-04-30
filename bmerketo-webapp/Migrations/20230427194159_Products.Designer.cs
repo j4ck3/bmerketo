@@ -12,8 +12,8 @@ using bmerketo_webapp.Contexts;
 namespace bmerketo_webapp.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230426002601_Categories")]
-    partial class Categories
+    [Migration("20230427194159_Products")]
+    partial class Products
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,9 +41,8 @@ namespace bmerketo_webapp.Migrations
 
             modelBuilder.Entity("bmerketo_webapp.Models.Entities.ProductEntity", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CategoryId")
                         .IsRequired()

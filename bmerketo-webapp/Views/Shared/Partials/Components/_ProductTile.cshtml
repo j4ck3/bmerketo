@@ -3,7 +3,7 @@
 <div class="col d-flex justify-content-center">
     <div class="card">
         <div class="product-tile-body">
-            <a class="model-item-body" asp-controller="products" asp-action="details" asp-route-id="@Model.Id">
+            <a class="model-item-body" asp-controller="product" asp-action="index" asp-route-id="@Model.Id">
                 @if (Model.ImageUrl != null)
                 {
                     <img class="model-item-img" src="@Model.ImageUrl" alt="@Model.Title" />
@@ -15,10 +15,7 @@
                     @if (Model.OldPrice != null) { <span class="product-tile-price text-decoration-line-through me-2">$@Model.OldPrice</span> }
                     @if (Model.Price != null) { <span class="product-tile-price">$@Model.Price</span> }
                 </div>
-                @if (Model.Button != null)
-                {
-                    <a class="btn-theme" asp-controller="product" asp-action="products" asp-route-id="@Model.Id"><i class="fa-solid fa-cart-plus"></i>@Model.Button.Content</a>
-                }
+                <a><i class="fa-solid fa-cart-plus"></i></a>
             </div>
         </div>
     </div>

@@ -1,50 +1,39 @@
-﻿<div class="container-xxl">
-    <p>
-        <div class="colapse-container">
-            <a id="productColapse" class="product-colapse" onclick="toggleColapse(0)" data-bs-toggle="collapse" href="#Description" role="button" aria-expanded="false" aria-controls="collapseExample">
-                Description
-            </a>
-            <a id="productColapse" class="product-colapse" onclick="toggleColapse(1)" data-bs-toggle="collapse" href="#Additional" role="button" aria-expanded="false" aria-controls="collapseExample">
-                Additional
-            </a>
-            <a id="productColapse" class="product-colapse" onclick="toggleColapse(2)" data-bs-toggle="collapse" href="#Shopping" role="button" aria-expanded="false" aria-controls="collapseExample">
-                Shopping & Returns
-            </a>
-            <a id="productColapse" class="product-colapse" onclick="toggleColapse(3)" data-bs-toggle="collapse" href="#Reviews" role="button" aria-expanded="false" aria-controls="collapseExample">
-                Reviews
-            </a>
-        </div>
-    </p>
-
-    <div class="collapse" id="Description">
-        <div class="card card-body">
-            <span>
-                Way extensive and dejection get delivered deficient sincerity gentleman age.
-                Too end instrument possession contrasted motionless. Calling offence six joy feeling.
-                Coming merits and was talent enough far. Sir joy northward sportsmen education. Discovery
-                incommode earnestly no he commanded if. Put still any about manor heard.<br>
-                * Village did removed enjoyed explain nor ham saw calling talking.<br>
-                * Securing as informed declared or margaret.<br>
-                * Joy horrible moreover man feelings own shy.<br>
-                On even feet time have an no at. Relation so in confined smallest children unpacked delicate.
-                Why sir end believe uncivil respect. Always get adieus nature day course for common. My little
-                garret repair to desire he esteem.
-            </span>
-        </div>
+﻿@model ItemViewModel
+<p>
+    <div class="colapse-container">
+        <a id="productColapse" class="product-colapse" onclick="toggleColapse(0)" data-bs-toggle="collapse" href="#Description" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Description
+        </a>
+        <a id="productColapse" class="product-colapse" onclick="toggleColapse(1)" data-bs-toggle="collapse" href="#Additional" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Additional
+        </a>
+        <a id="productColapse" class="product-colapse" onclick="toggleColapse(2)" data-bs-toggle="collapse" href="#Shopping" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Shopping & Returns
+        </a>
+        <a id="productColapse" class="product-colapse" onclick="toggleColapse(3)" data-bs-toggle="collapse" href="#Reviews" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Reviews
+        </a>
     </div>
-    <div class="collapse" id="Additional">
-        <div class="card card-body">
-            <span>Additional</span>
-        </div>
+</p>
+<div class="collapse" id="Description">
+    <div class="card card-body">
+        <span>
+            @Model.Description
+        </span>
     </div>
-    <div class="collapse" id="Shopping">
-        <div class="card card-body">
-            <span>Shopping & Returns</span>
-        </div>
+</div>
+<div class="collapse" id="Additional">
+    <div class="card card-body">
+        <span>Additional</span>
     </div>
-    <div class="collapse" id="Reviews">
-        <div class="card card-body">
-            <span>Reviews</span>
-        </div>
+</div>
+<div class="collapse" id="Shopping">
+    <div class="card card-body">
+        <span>Shopping & Returns</span>
+    </div>
+</div>
+<div class="collapse" id="Reviews">
+    <div class="card card-body">
+        <span>Reviews</span>
     </div>
 </div>

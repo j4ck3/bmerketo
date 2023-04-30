@@ -11,12 +11,6 @@
         border-bottom: none;
         padding-left: 20px;
     }
-
-    .product-detail-images {
-        max-width: 501px !important;
-    }
-
-
     #inc-button {
         right: 12px;
         top: 12px;
@@ -40,6 +34,11 @@
         user-select: none;
     }
 }
+
+#main-image {
+    width: 100%;
+}
+
 
 .button-product {
     margin-left: 1rem;
@@ -103,10 +102,15 @@
     color: $color-star;
 }
 
-.product-tab {
-    border: 1px solid #DDDDDD !important;
-}
-
 .product-showcase-bg {
     background: #FAFAFA;
+}
+.related-prodcuts-text {
+    font-weight: $font-weight-bold;
+    font-size: 22px;
+    margin-top: 50px;
+    border-top: 1px solid $color-dark-3;
+    padding-top: 20px;
+    margin: 0;
+
 }

@@ -7,7 +7,7 @@ namespace bmerketo_webapp.Models.Entities
     public class ProductEntity
     {
         [Key]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Column(TypeName = "nvarchar(50)")]
         [StringLength(50)]
@@ -34,11 +34,13 @@ namespace bmerketo_webapp.Models.Entities
         {
             return new ItemViewModel
             {
+                Id = entity.Id,
                 Title = entity.Name,
                 Description = entity.Description,
                 Price = entity.Price,
                 OldPrice = entity.OldPrice,
-                Category = entity.Category.CategoryName,
+                Category = entity.Category,
+                ImageUrl = entity.ImageUrl,
             };
         }
 

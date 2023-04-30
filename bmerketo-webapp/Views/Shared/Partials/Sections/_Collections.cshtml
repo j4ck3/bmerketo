@@ -1,7 +1,7 @@
 ﻿@model CollectionsViewModel
 
 
-@if (Model != null)
+@if (Model.GridItems != null)
 {
     @if (Model.Categories != null)
     {
@@ -18,17 +18,13 @@
         <h3 class="collection-title">@Model.Title</h3>
     }
 
-    @if (Model.GridItems != null)
-    {
-        <div class="container-xxl mt-5">
-            <div class="mt-5 row row-cols-md-1 row-cols-lg-3 row-cols-xl-4 g-3">
-                @foreach (var item in Model.GridItems)
-                {
-                    <partial name="/Views/Shared/Partials/Components/_ProductTile.cshtml" model="item" />
-                }
-            </div>
+        <div class="row row-cols-md-1 row-cols-lg-3 row-cols-xl-4 g-3">
+            @foreach (var item in Model.GridItems)
+            {
+                <partial name="/Views/Shared/Partials/Components/_ProductTile.cshtml" model="item" />
+            }
         </div>
-    }
+    
 
     @if (Model.LoadMore)
     {

@@ -49,8 +49,10 @@ button {
     background-color: $color-theme-1;
     color: white;
     text-transform: uppercase;
+    text-align: center;
     display: block;
-    width: 130px;
+    width: 190px;
+    padding: 10px 35px;
 }
 
 .bg-footer {
@@ -77,4 +79,11 @@ button {
     @include lg {
         height: 400px
     }
+}
+
+.all-products-title {
+    margin-top: 200px;
+    margin-bottom: 2rem;
+    font-weight: $font-weight-bold;
+    text-align: center;
 }

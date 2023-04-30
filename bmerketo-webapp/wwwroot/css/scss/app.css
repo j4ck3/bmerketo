@@ -50,8 +50,10 @@ button:hover {
   background-color: #FA3150;
   color: white;
   text-transform: uppercase;
+  text-align: center;
   display: block;
-  width: 130px;
+  width: 190px;
+  padding: 10px 35px;
 }
 
 .bg-footer {
@@ -78,6 +80,13 @@ button:hover {
   .map iframe {
     height: 400px;
   }
+}
+
+.all-products-title {
+  margin-top: 200px;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  text-align: center;
 }
 
 header {
@@ -580,6 +589,7 @@ header .toggle .btn-white {
 }
 .card .model-item-body .model-item-img {
   border-radius: 5px;
+  max-width: 270px;
 }
 .card .model-item-body-big {
   cursor: pointer;
@@ -597,6 +607,24 @@ header .toggle .btn-white {
   display: inline;
 }
 
+.colapse-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.colapse-container .product-colapse {
+  width: 100%;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #636363;
+  border: 1px solid #AEAEAE;
+}
+.colapse-container .product-colapse-toggle-active {
+  background-color: #FA3150;
+  color: white;
+}
+
 .product-input-qty-container {
   position: relative;
   width: 130px;
@@ -609,9 +637,6 @@ header .toggle .btn-white {
   border-top: none;
   border-bottom: none;
   padding-left: 20px;
-}
-.product-input-qty-container .product-detail-images {
-  max-width: 501px !important;
 }
 .product-input-qty-container #inc-button {
   right: 12px;
@@ -632,6 +657,10 @@ header .toggle .btn-white {
   cursor: pointer;
   -webkit-user-select: none;
   user-select: none;
+}
+
+#main-image {
+  width: 100%;
 }
 
 .button-product {
@@ -690,12 +719,17 @@ header .toggle .btn-white {
   color: #FFB71B;
 }
 
-.product-tab {
-  border: 1px solid #DDDDDD !important;
-}
-
 .product-showcase-bg {
   background: #FAFAFA;
+}
+
+.related-prodcuts-text {
+  font-weight: 700;
+  font-size: 22px;
+  margin-top: 50px;
+  border-top: 1px solid #AEAEAE;
+  padding-top: 20px;
+  margin: 0;
 }
 
 .profile-container {

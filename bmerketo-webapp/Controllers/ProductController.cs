@@ -6,7 +6,6 @@ namespace bmerketo_webapp.Controllers
 {
     public class ProductController : Controller
     {
-
         private readonly ProductService _productService;
 
         public ProductController(ProductService productService)
@@ -14,10 +13,11 @@ namespace bmerketo_webapp.Controllers
             _productService = productService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string id)
         {
-            ViewData["Title"] = "Product";
-            return View();
+            var item = await _productService.Get(id);
+            ViewData["Title"] = $"{item.Title}";
+            return View(item);
         }
 
         public IActionResult Search()
@@ -26,21 +26,22 @@ namespace bmerketo_webapp.Controllers
             return View();
         }
 
-        public IActionResult Products()
+        public async Task<IActionResult> Products()
         {
             ViewData["Title"] = "All Products";
 
-            var viewmodel = new ProductsViewModel
+            var viewModel = new ProductsViewModel
             {
                 Title = "All Products",
                 Button = new ButtonViewModel
                 {
                     Content = "Load More",
                     Url = ""
-                }
+                },
+                Items = await _productService.GetAllAsync("")
             };
-            return View(viewmodel);
-        }
 
+            return View(viewModel);
+        }
     }
 }

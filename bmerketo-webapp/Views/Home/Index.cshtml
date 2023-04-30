@@ -7,9 +7,11 @@
 
 @if (Model.BestCollection != null)
 {
-       <partial name="../Shared/Partials/Sections/_Collections.cshtml" model="@Model.BestCollection" /> 
+    <div class="container-xxl">
+               <partial name="../Shared/Partials/Sections/_Collections.cshtml" model="@Model.BestCollection" /> 
+    </div>
 }
 <partial name="../Shared/Partials/Sections/_ProductTileGrid.cshtml" model="@Model.ProductTileGrid" />
 <partial name="../Shared/Partials/Sections/_ProductTileRow.cshtml" model="@Model.ProductTileRow" />
 <partial name="../Shared/Partials/Sections/_ProductTileRowXl.cshtml" model="@Model.ProductTileRowXl" />
-<partial name="../Shared/Partials/Sections/_MailSub.cshtml" />
+<partial name="../Shared/Partials/Sections/_MailSub.cshtml" />  

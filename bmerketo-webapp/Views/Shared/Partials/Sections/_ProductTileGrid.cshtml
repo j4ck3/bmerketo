@@ -1,6 +1,7 @@
 ﻿@model ProductTileGridViewModel
-
-<section class="bg">
+@if(Model.GridItems != null)
+{
+    <section class="bg">
     <div class="container-xxl">
         <div class="mt-5 row row-cols-md-1 row-cols-lg-2 row-cols-xl-3 g-4">
             @if (@Model.GridItems.ElementAt(0) != null)
@@ -20,18 +21,18 @@
                     }
                 </div>
             </div>
-            @if (@Model.GridItems.ElementAt(1) != null)
+            @if (Model.GridItems.Count() > 1 && Model.GridItems.ElementAt(1) != null)
             {
                 <partial name="../Components/_ProductTileXl.cshtml" model="@Model.GridItems.ElementAt(1)" />
             }
-            @if (Model.GridItems.Count() >= 2)
+@*            @if (Model.GridItems.Count() >= 3)
             {
                 @for (int i = 2; i < Model.GridItems.Count(); i++) 
                 {
-                    <partial name="../Components/_ProductTileXl.cshtml" model="@Model.GridItems.Skip(2).ElementAt(i)" />
+                    <partial name="../Components/_ProductTileXl.cshtml" model="@Model.GridItems.Skip(2)" />
                 }
-            }
-
+            }*@
         </div>
     </div>
 </section>
+}

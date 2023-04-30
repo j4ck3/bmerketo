@@ -38,9 +38,8 @@ namespace bmerketo_webapp.Migrations
 
             modelBuilder.Entity("bmerketo_webapp.Models.Entities.ProductEntity", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CategoryId")
                         .IsRequired()

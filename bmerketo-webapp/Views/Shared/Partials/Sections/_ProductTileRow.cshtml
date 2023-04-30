@@ -1,15 +1,19 @@
 ﻿@model ProductTileRowViewModel
-@if (!string.IsNullOrEmpty(Model.Title))
+
+@if(Model.Items != null)
 {
-    <h3 class="product-tile-row-title">@Model.Title</h3>
-}
-<div class="mt-5 row row-cols-md-1 row-cols-lg-4 row-cols-xl-6 g-1">
-    @foreach (var item in Model.Items)
+    @if (!string.IsNullOrEmpty(Model.Title))
     {
-        <partial name="/Views/Shared/Partials/Components/_ProductTile.cshtml" model="item" />
+        <h3 class="product-tile-row-title">@Model.Title</h3>
     }
-</div>
-<div class="product-tile-row-buttons d-flex justify-content-center flex-direction-row">
-    <button class="product-tile-row-button"><i class="fa-solid fa-chevron-left"></i></button>
-    <button class="product-tile-row-button"><i class="fa-solid fa-chevron-right"></i></button>
-</div>
+    <div class="mt-5 row row-cols-md-1 row-cols-lg-4 row-cols-xl-6 g-1">
+        @foreach (var item in Model.Items)
+        {
+                <partial name="/Views/Shared/Partials/Components/_ProductTile.cshtml" model="item" />
+        }
+    </div>
+    <div class="product-tile-row-buttons d-flex justify-content-center flex-direction-row">
+        <button class="product-tile-row-button"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="product-tile-row-button"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+}

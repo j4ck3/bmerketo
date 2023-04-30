@@ -2,7 +2,7 @@
 {
     public class HomeIndexViewModel
     {
-        public string Title { get; set; } = null!;
+        public string? Title { get; set; }
         public CollectionsViewModel? BestCollection { get; set; }
         public LandingViewModel? Landing { get; set; }
         public ProductTileGridViewModel? ProductTileGrid { get; set; }
