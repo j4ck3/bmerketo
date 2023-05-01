@@ -1,4 +1,5 @@
 ﻿@{
+    ViewData["Title"] = "Account";
     var userId = User.FindFirst("Id")?.Value;
     UserProfileEntity user = await userService.GetAsync(userId!);
     var userRoles = await userManager.GetRolesAsync(user.User);
