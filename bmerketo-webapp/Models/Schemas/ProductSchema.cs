@@ -1,11 +1,10 @@
 ﻿using bmerketo_webapp.Models.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace bmerketo_webapp.Models;
+namespace bmerketo_webapp.Models.Schemas;
 
 public class CreateProductFormModel
 {
-
     [Required(ErrorMessage = "Du måste ange ett namn")]
     [MinLength(2, ErrorMessage = "Namnet måsta vara minst {1} bokstäver långt.")]
     [Display(Name = "Produkt namn")]
@@ -24,9 +23,10 @@ public class CreateProductFormModel
     [DataType(DataType.Currency)]
     public decimal? OldPrice { get; set; }
 
+    public List<string>? Tags { get; set; }
 
     [Display(Name = "Välj en kategori")]
-    public ProductCategoryModel Category { get; set; } = new ProductCategoryModel();
+    public ProductCategorySchema Category { get; set; } = new ProductCategorySchema();
 
     [Display(Name = "Välj en kategori")]
     [Required(ErrorMessage = "Du måste välja en kategori")]

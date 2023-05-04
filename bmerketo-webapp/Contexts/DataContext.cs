@@ -11,5 +11,7 @@ namespace bmerketo_webapp.Contexts
 
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<ProductCategoryEntity> ProductCategories { get; set; }
+        public DbSet<TagEntity> Tags { get; set; }
+        public DbSet<ProductTagEntity> ProductTags { get; set; }
     }
 }

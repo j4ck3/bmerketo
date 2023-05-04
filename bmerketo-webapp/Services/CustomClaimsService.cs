@@ -17,6 +17,9 @@ public class CustomClaimsService : UserClaimsPrincipalFactory<IdentityUser>
     {
         var claimsIdentity = await base.GenerateClaimsAsync(user);
 
+        var roles = await UserManager.GetRolesAsync(user);
+        claimsIdentity.AddClaims(roles.Select(x => new Claim(ClaimTypes.Role, x)));
+
         var userProfileEntity = await _userService.GetAsync(user.Id);
 
         claimsIdentity.AddClaim(new Claim("DisplayName", $"{userProfileEntity.FirstName} {userProfileEntity.LastName}"));

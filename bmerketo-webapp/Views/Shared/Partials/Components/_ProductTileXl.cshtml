@@ -3,9 +3,9 @@
     <div class="card">
         <div class="product-tile-xl-body">
             <a class="model-item-body-big" asp-controller="product" asp-route-id="@Model.Id">
-                    @if (Model.ImageUrl != null)
+                    @if (Model.ImageName != null)
                     {
-                       <img class="model-item-img w-100" src="@Model.ImageUrl" alt="@Model.Title" />  
+                       <img class="model-item-img w-100" src="@Model.ImageName" alt="@Model.Title" />  
                     }
             </a>
             <div class="d-flex justify-content-between align-items-end m-3">

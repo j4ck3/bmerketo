@@ -28,7 +28,9 @@ namespace bmerketo_webapp.Models.Entities
 
         public ProductCategoryEntity Category { get; set; } = null!;
 
-        public string? ImageUrl { get; set; }
+        public ICollection<TagEntity> Tags { get; set; } = new HashSet<TagEntity>();
+
+        public string? ImageName { get; set; }
 
         public static implicit operator ItemViewModel(ProductEntity entity)
         {
@@ -40,9 +42,8 @@ namespace bmerketo_webapp.Models.Entities
                 Price = entity.Price,
                 OldPrice = entity.OldPrice,
                 Category = entity.Category,
-                ImageUrl = entity.ImageUrl,
+                ImageName = entity.ImageName,
             };
         }
-
     }
 }

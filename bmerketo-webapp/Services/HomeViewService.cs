@@ -32,6 +32,7 @@ public class HomeViewService
             {
                 Title = "Best Collection",
                 Categories = new List<string> { "All", "Bag", "Dress", "Decoration", "Essentials", "Interior", "Laptops", "Mobile", "Beauty" },
+                //populate categories with real categoris
                 GridItems = await _productService.GetAllAsync("Featured")
             },
 

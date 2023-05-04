@@ -1,0 +1,33 @@
+﻿@{
+    var tags = await tagService.GetAllAsync();
+}
+
+<partial name="/Views/Shared/Partials/Sections/_AdminNav.cshtml" />
+
+<div class="container d-flex justify-content-center align-items-center mt-5">
+    <div class="content-list mt-5">
+        <h3 class="collection-title">Tags</h3>
+        @if (tags.Any())
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th class="me-4">Name</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                @foreach (var tag in tags)
+                {
+                        <tr>
+                            <td>@tag.Name</td>
+                            <td>
+                                <a class="admin-nav-link" asp-controller="admin" asp-action="deleteuser">Delete</a>
+                            </td>
+                        </tr>
+                }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

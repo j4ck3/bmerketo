@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
 builder.Services.AddControllersWithViews();
 
+
+
+//data contexts
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DbContent")));
 builder.Services.AddDbContext<IdentityContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DbIdentity")));
 
@@ -22,15 +24,24 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(x =>
     .AddClaimsPrincipalFactory<CustomClaimsService>();
 
 
-
+//services
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<ProductCategoryService>();
 builder.Services.AddScoped<RolesService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<TagService>();
+
+builder.Services.AddScoped<HomeViewService>();
+
+
+
+//repos
 builder.Services.AddScoped<ProductCategoryRepo>();
 builder.Services.AddScoped<ProductRepo>();
-builder.Services.AddScoped<HomeViewService>();
+builder.Services.AddScoped<TagRepo>();
+builder.Services.AddScoped<ProductTagRepo>();
+
 
 
 var app = builder.Build();

@@ -1,5 +1,5 @@
 ﻿using bmerketo_webapp.Contexts;
-using bmerketo_webapp.Models;
+using bmerketo_webapp.Models.DTOS;
 using bmerketo_webapp.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -27,14 +27,14 @@ public class UserService
     }
 
 
-    public async Task<List<UserModel>> GetAllAsync()
+    public async Task<List<User>> GetAllAsync()
     {
-        var users = new List<UserModel>();
+        var users = new List<User>();
 
         foreach (var userProfile in await _identityContext.UserProfiles.Include(x => x.User).Include(x => x.Address).ToListAsync())
         {
             var _userRoles = await _userManager.GetRolesAsync(userProfile.User);
-            users.Add(new UserModel
+            users.Add(new User
             {
                 Id = userProfile.UserId,
                 Roles = _userRoles,

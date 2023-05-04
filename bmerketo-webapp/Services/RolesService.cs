@@ -14,9 +14,17 @@ public class RolesService
     public async Task SeedRoles()
     {
         if (!await _roleManager.RoleExistsAsync("Admin"))
-            await _roleManager.CreateAsync(new IdentityRole("Admin"));
+        {
+            var role = new IdentityRole("Admin");
+            role.ConcurrencyStamp = Guid.NewGuid().ToString();
+            await _roleManager.CreateAsync(role);
+        }
         if (!await _roleManager.RoleExistsAsync("User"))
-            await _roleManager.CreateAsync(new IdentityRole("User"));
+        {
+            var role = new IdentityRole("User");
+            role.ConcurrencyStamp = Guid.NewGuid().ToString();
+            await _roleManager.CreateAsync(role);
+        }
     } 
 }
 

@@ -1,5 +1,5 @@
-﻿using bmerketo_webapp.Models;
-using bmerketo_webapp.Models.Entities;
+﻿using bmerketo_webapp.Models.Entities;
+using bmerketo_webapp.Models.Schemas;
 using bmerketo_webapp.Repos;
 
 namespace bmerketo_webapp.Services
@@ -21,12 +21,12 @@ namespace bmerketo_webapp.Services
             return categoryEntity;
         }
 
-        public async Task<IEnumerable<ProductCategoryModel>> GetAllAsync()
+        public async Task<IEnumerable<ProductCategorySchema>> GetAllAsync()
         {
-            var categories = new List<ProductCategoryModel>();
+            var categories = new List<ProductCategorySchema>();
 
             foreach (var item in await _categoryRepo.GetAllAsync())
-                categories.Add(new ProductCategoryModel { Value = item.Id, Name = item.CategoryName });
+                categories.Add(new ProductCategorySchema { Value = item.Id, Name = item.CategoryName });
 
             return categories;
         }

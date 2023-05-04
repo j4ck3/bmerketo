@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using bmerketo_webapp.Models.Schemas;
 
 namespace bmerketo_webapp.Models.Entities
 {
@@ -9,11 +10,11 @@ namespace bmerketo_webapp.Models.Entities
 
         public string CategoryName { get; set; } = null!;
 
-        public ICollection<ProductEntity>? Products { get; set; } = new List<ProductEntity>();
+        public ICollection<ProductEntity>? Products { get; set; } = new HashSet<ProductEntity>();
 
-        public static implicit operator ProductCategoryModel(ProductCategoryEntity model)
+        public static implicit operator ProductCategorySchema(ProductCategoryEntity model)
         {
-            return new ProductCategoryModel
+            return new ProductCategorySchema
             {
                 Value = model.Id,
                 Name = model.CategoryName,

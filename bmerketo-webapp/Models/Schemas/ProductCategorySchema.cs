@@ -1,14 +1,14 @@
 ﻿using bmerketo_webapp.Models.Entities;
 
-namespace bmerketo_webapp.Models;
+namespace bmerketo_webapp.Models.Schemas;
 
-public class ProductCategoryModel
+public class ProductCategorySchema
 {
     public string? Value { get; set; }
     public string? Name { get; set; }
 
 
-    public static implicit operator ProductCategoryEntity(ProductCategoryModel model)
+    public static implicit operator ProductCategoryEntity(ProductCategorySchema model)
     {
         return new ProductCategoryEntity
         {

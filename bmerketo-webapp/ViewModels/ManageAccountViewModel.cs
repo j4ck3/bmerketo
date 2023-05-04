@@ -1,5 +1,5 @@
-﻿using bmerketo_webapp.Models;
-using bmerketo_webapp.Models.Entities;
+﻿using bmerketo_webapp.Models.Entities;
+using bmerketo_webapp.Models.Schemas;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
@@ -50,7 +50,7 @@ public class ManageAccountViewModel
     public string? Company { get; set; }
 
     [Display(Name = "Choose atleast one role.")]
-    public ProductCategoryModel Category { get; set; } = new ProductCategoryModel();
+    public ProductCategorySchema Category { get; set; } = new ProductCategorySchema();
 
     [Display(Name = "Välj en kategori")]
     [Required(ErrorMessage = "Du måste välja en kategori")]

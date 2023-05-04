@@ -1,8 +1,8 @@
 ﻿using bmerketo_webapp.Models.Entities;
 
-namespace bmerketo_webapp.Models
+namespace bmerketo_webapp.Models.DTOS
 {
-    public class UserModel
+    public class User
     {
         public string Id { get; set; } = null!;
         public IList<string>? Roles { get; set; }

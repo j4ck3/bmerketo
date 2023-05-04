@@ -1,6 +1,6 @@
 ﻿using bmerketo_webapp.Contexts;
-using bmerketo_webapp.Models;
 using bmerketo_webapp.Models.Entities;
+using bmerketo_webapp.Models.Schemas;
 using bmerketo_webapp.Repos;
 using bmerketo_webapp.ViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -35,7 +35,7 @@ public class ProductService
                     Description = item.Description,
                     Price = item.Price,
                     OldPrice = item.OldPrice,
-                    ImageUrl = item.ImageUrl,
+                    ImageName = item.ImageName,
                     Category = item.Category,
                 });
             }
@@ -53,7 +53,7 @@ public class ProductService
                     Description = item.Description,
                     Price = item.Price,
                     OldPrice = item.OldPrice,
-                    ImageUrl = item.ImageUrl,
+                    ImageName = item.ImageName,
                     Category = item.Category,
                 });
             }
