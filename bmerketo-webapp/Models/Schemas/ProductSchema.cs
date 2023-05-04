@@ -23,8 +23,6 @@ public class CreateProductFormModel
     [DataType(DataType.Currency)]
     public decimal? OldPrice { get; set; }
 
-    public List<string>? Tags { get; set; }
-
     [Display(Name = "Välj en kategori")]
     public ProductCategorySchema Category { get; set; } = new ProductCategorySchema();
 

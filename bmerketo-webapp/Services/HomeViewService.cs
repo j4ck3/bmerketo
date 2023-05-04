@@ -33,7 +33,7 @@ public class HomeViewService
                 Title = "Best Collection",
                 Categories = new List<string> { "All", "Bag", "Dress", "Decoration", "Essentials", "Interior", "Laptops", "Mobile", "Beauty" },
                 //populate categories with real categoris
-                GridItems = await _productService.GetAllAsync("Featured")
+                GridItems = await _productService.GetAllAsync("Shoes")
             },
 
             ProductTileGrid = new ProductTileGridViewModel
@@ -42,7 +42,7 @@ public class HomeViewService
                 Title2 = "50% OFF",
                 Title3 = "Get The Best Price",
                 Title4 = "Get the best daily offer et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren no sea taki",
-                GridItems = await _productService.GetAllAsync("New"),
+                GridItems = await _productService.GetAllAsync("Shoes"),
                 Button = new ButtonViewModel
                 {
                     Content = "Discover More",
@@ -52,11 +52,11 @@ public class HomeViewService
             ProductTileRow = new ProductTileRowViewModel
             {
                 Title = "Top selling products in this week",
-                Items = await _productService.GetAllAsync("Popular"),
+                Items = await _productService.GetAllAsync("Jackets"),
             },
             ProductTileRowXl = new ProductTileRowXlViewModel
             {
-                Items = await _productService.GetAllAsync("Featured")
+                Items = await _productService.GetAllAsync("Accessories")
             }
         };
         return viewModel;

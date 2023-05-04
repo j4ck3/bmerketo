@@ -89,6 +89,13 @@ button:hover {
   text-align: center;
 }
 
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 header {
   height: 110px;
   width: 100%;

@@ -10,7 +10,7 @@ namespace bmerketo_webapp.Controllers;
 [Authorize(Roles = "Admin")]
 public class AdminController : Controller
 {
-
+    #region private fiels & ctor
     private readonly ProductService _productService;
     private readonly AuthService _authService;
     private readonly TagService _tagService;
@@ -21,6 +21,7 @@ public class AdminController : Controller
         _authService = authService;
         _tagService = tagService;
     }
+    #endregion
 
     #region views HTTPGET
 
@@ -36,8 +37,9 @@ public class AdminController : Controller
         return View();
     }
 
-    public IActionResult CreateProduct()
+    public async Task<IActionResult> CreateProduct()
     {
+        ViewBag.Tags = await _tagService.GetTagsToFormAsync();
         ViewData["Title"] = "New Prodcut";
         return View();
     }
@@ -61,6 +63,7 @@ public class AdminController : Controller
     }
     public IActionResult CreateTag()
     {
+
         ViewData["Title"] = "Create tag";
         return View();
     }
@@ -85,21 +88,27 @@ public class AdminController : Controller
         return View(viewModel);
     }
 
+
     [HttpPost]
-    public async Task<IActionResult> CreateProduct(CreateProductFormModel viewModel)
+    public async Task<IActionResult> CreateProduct(CreateProductFormModel viewModel, string[] tags)
     {
         if (ModelState.IsValid)
         {
-            if (await _productService.CreateAsync(viewModel))
-                return RedirectToAction("products");
+            var productEntity = await _productService.CreateAsync(viewModel);
+
+            if(productEntity != null)
+                if(await _tagService.CreateProductTagsAsync(productEntity, tags))
+                    return RedirectToAction("products");
 
             ModelState.AddModelError("", "Something went wrong while trying to create the product");
         }
 
         ModelState.AddModelError("", "Please Validate the form");
-
+        ViewBag.Tags = await _tagService.GetTagsToFormAsync(tags);
         return View(viewModel);
     }
+
+
 
     [HttpPost]
     public async Task<IActionResult> CreateTag(TagSchema schema)

@@ -61,7 +61,7 @@ public class ProductService
         }
     }
 
-    public async Task<bool> CreateAsync(CreateProductFormModel form)
+    public async Task<ProductEntity> CreateAsync(CreateProductFormModel form)
     {
         try
         {
@@ -70,10 +70,10 @@ public class ProductService
             // = (await _categoryService.GetOrCreateAsync(productEntity.Category)).Id;
 
 
-            await _productRepo.AddAsync(productEntity);
-            return true;
+            var result = await _productRepo.AddAsync(productEntity);
+            return result;
         }
-        catch { return false; }
+        catch { return null!; }
     }
 
     public async Task<ItemViewModel> Get(string id)

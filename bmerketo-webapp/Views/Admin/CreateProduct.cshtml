@@ -36,6 +36,15 @@
                 </select>
                 <span asp-validation-for="CategoryId"></span>
             </div>
+            <div class="mb-4">
+                @foreach(SelectListItem tag in ViewBag.Tags)
+                {
+                    <div class="mb-1">
+                        <input type="checkbox" value="@tag.Value" checked="@tag.Selected" name="Tags" id="product-tags-@tag.Value">
+                        <label for="product-tags-@tag.Value" class="small form-check-label no-select">@tag.Text</label>
+                    </div>
+                }
+            </div>
             <button type="submit" class="btn-theme">Submit</button>
         </form>
     </div>

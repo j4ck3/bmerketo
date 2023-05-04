@@ -87,3 +87,9 @@ button {
     font-weight: $font-weight-bold;
     text-align: center;
 }
+.no-select {
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;
+}
