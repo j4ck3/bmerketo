@@ -3,10 +3,17 @@
     <div class="card">
         <div class="product-tile-xl-body">
             <a class="model-item-body-big" asp-controller="product" asp-route-id="@Model.Id">
-                    @if (Model.ImageName != null)
+                @if (Model.ImageName != null)
+                {
+                    if (Model.ImageName.Contains("/"))
                     {
-                       <img class="model-item-img w-100" src="@Model.ImageName" alt="@Model.Title" />  
+                        <img class="model-item-img" src="@Model.ImageName" alt="@Model.Title" />
                     }
+                    else
+                    {
+                        <img class="model-item-img" src="@Url.Content("~/imgs/products/" + Model.ImageName)" alt="@Model.Title" />
+                    }
+                }
             </a>
             <div class="d-flex justify-content-between align-items-end m-3">
                 <div>

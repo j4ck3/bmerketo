@@ -5,7 +5,14 @@
             <a class="model-item-body-big" asp-controller="product" asp-action="index" asp-route-id="@Model.Id">
                 @if (Model.ImageName != null)
                 {
-                   <img class="model-item-img w-100" src="@Model.ImageName" alt="@Model.Title" />  
+                    if (Model.ImageName.Contains("/"))
+                    {
+                        <img class="model-item-img" src="@Model.ImageName" alt="@Model.Title" />
+                    }
+                    else
+                    {
+                        <img class="model-item-img" src="@Url.Content("~/imgs/products/" + Model.ImageName)" alt="@Model.Title" />
+                    }
                 }
             </a>
             <div class="d-flex justify-content-between align-items-end">

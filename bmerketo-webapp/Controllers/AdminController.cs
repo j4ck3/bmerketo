@@ -97,9 +97,16 @@ public class AdminController : Controller
             var productEntity = await _productService.CreateAsync(viewModel);
 
             if(productEntity != null)
-                if(await _tagService.CreateProductTagsAsync(productEntity, tags))
-                    return RedirectToAction("products");
+            {
+                if (await _tagService.CreateProductTagsAsync(productEntity, tags))
+                {
+                    if (viewModel.Image != null)
+                        await _productService.UploadImageAsync(productEntity, viewModel.Image);
 
+                    return RedirectToAction("products");
+                }
+                ModelState.AddModelError("", "Something went wrong while trying to add the tags to the product.");
+            }
             ModelState.AddModelError("", "Something went wrong while trying to create the product");
         }
 

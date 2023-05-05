@@ -597,12 +597,14 @@ header .toggle .btn-white {
 .card .model-item-body .model-item-img {
   border-radius: 5px;
   max-width: 270px;
+  width: 100%;
 }
 .card .model-item-body-big {
   cursor: pointer;
 }
 .card .model-item-body-big .model-item-img {
   border-radius: 5px;
+  width: 100%;
 }
 .card i {
   display: none;

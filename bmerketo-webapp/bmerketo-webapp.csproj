@@ -9,9 +9,13 @@
 
   <ItemGroup>
     <Compile Remove="Repositories\**" />
+    <Compile Remove="wwwroot\imgs\ProductsImgs\**" />
     <Content Remove="Repositories\**" />
+    <Content Remove="wwwroot\imgs\ProductsImgs\**" />
     <EmbeddedResource Remove="Repositories\**" />
+    <EmbeddedResource Remove="wwwroot\imgs\ProductsImgs\**" />
     <None Remove="Repositories\**" />
+    <None Remove="wwwroot\imgs\ProductsImgs\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,7 +52,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\imgs\ProductsImgs\" />
+    <Folder Include="wwwroot\imgs\products\" />
   </ItemGroup>
 
 </Project>

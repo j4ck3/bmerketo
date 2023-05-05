@@ -9,16 +9,21 @@ namespace bmerketo_webapp.Services;
 
 public class ProductService
 {
+
+    #region private feilds and ctor
     private readonly ProductCategoryService _categoryService;
     private readonly ProductRepo _productRepo;
     private readonly DataContext _dataContext;
+    private readonly IWebHostEnvironment _webHostEnvironment;
 
-    public ProductService(ProductRepo productRepo, ProductCategoryService categoryService, DataContext dataContext)
+    public ProductService(ProductRepo productRepo, ProductCategoryService categoryService, DataContext dataContext, IWebHostEnvironment webHostEnvironment)
     {
         _productRepo = productRepo;
         _categoryService = categoryService;
         _dataContext = dataContext;
+        _webHostEnvironment = webHostEnvironment;
     }
+    #endregion
 
     public async Task<List<ItemViewModel>> GetAllAsync(string category)
     {
@@ -88,6 +93,17 @@ public class ProductService
             }
             return null!;
         }catch { return null!; }
+    }
+
+    public async Task<bool> UploadImageAsync(ProductEntity productEntity, IFormFile image)
+    {
+        try
+        {
+            string filePath = $"{_webHostEnvironment.WebRootPath}/imgs/products/{productEntity.ImageName}";
+            await image.CopyToAsync(new FileStream(filePath, FileMode.Create));
+            return true;
+        }
+        catch { return false; }
     }
 }
  
