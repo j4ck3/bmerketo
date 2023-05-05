@@ -3,12 +3,12 @@
 
 @if (Model.GridItems != null)
 {
-    @if (Model.Categories != null)
+    @if (Model.Categories != null && Model.Categories.Any())
     {
         <div class="d-flex justify-content-center mt-5">
             @foreach (var category in Model.Categories)
             {
-                <a class="collection-link">@category</a>
+                <a class="collection-link" asp-controller="Product" asp-action="Products" asp-route-category="@category.Name">@category.Name</a>
             }
         </div>
     }

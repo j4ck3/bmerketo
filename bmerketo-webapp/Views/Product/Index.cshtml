@@ -53,10 +53,11 @@
                         <span class="product-detail-sku">SKU: N/A</span>
                     </div>
 
-                    <button class="btn-white d-block mt-4" type="submit">Add To Wishlist</button>
+                    <button class="btn-white d-block my-4" type="submit">Add To Wishlist</button>
                     @if (Model.Category != null)
                     {
-                        <h3 class="mt-4 product-detail-cetegory">Category: @Model.Category.CategoryName</h3>
+                        <span class="product-detail-cetegory">Category:</span>
+                        <a class="collection-link d-inline-block" asp-controller="Product" asp-action="Products" asp-route-category="@Model.Category.Name">@Model.Category.Name</a>
                     }
                 </div>
             </div>
@@ -66,16 +67,16 @@
     <partial name="../Shared/Partials/Components/_Tabs" model="Model" />
     @if (Model.Category != null)
     {
-        var items = await productService.GetAllAsync(Model.Category.CategoryName);
+        var items = await productService.GetAllAsync(Model.Category.Name);
 
         @if (items != null)
         {
             <h3 class="related-prodcuts-text mb-4">Related Products</h3>
             var relatedProducts = new CollectionsViewModel
-                    {
-                        GridItems = items,
-                        LoadMore = false,
-                    };
+            {
+                GridItems = items,
+                LoadMore = false,
+            };
             <partial name="../Shared/Partials/Sections/_Collections.cshtml" model="relatedProducts" />
         }
     }

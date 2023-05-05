@@ -1,5 +1,6 @@
 ﻿using bmerketo_webapp.Models.Entities;
 using bmerketo_webapp.Models.DTOS;
+using bmerketo_webapp.Models.Schemas;
 
 namespace bmerketo_webapp.ViewModels;
 
@@ -15,6 +16,6 @@ public class ItemViewModel
     public string? Description { get; set; }
     public IEnumerable<Tag> Tags { get; set; } = new List<Tag>();
 
-    public ProductCategoryEntity? Category { get; set; }
+    public ProductCategorySchema? Category { get; set; }
     public ButtonViewModel? Button { get; set; }
 }

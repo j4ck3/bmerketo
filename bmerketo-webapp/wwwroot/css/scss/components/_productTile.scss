@@ -27,7 +27,7 @@
         .model-item-img {
             border-radius: 5px;
             max-width: 270px;
-            width: 100%;
+            max-height: 270px;
         }
     }
 
@@ -39,24 +39,12 @@
             width: 100%;
         }
     }
-    /*        h4 {
-        font-weight: $font-weight-regular;
-        font-size: 18px;
-        color: black;
-        margin: 10px 0;
-    }
-
-    p {
-        font-weight: $font-weight-regular;
-        color: #636363;
-        margin: 0;
-    }*/
-
     i {
         display: none;
         font-size: 24px;
         color: black;
         transition: all .2s;
+        cursor: pointer;
     }
 
     &:hover {

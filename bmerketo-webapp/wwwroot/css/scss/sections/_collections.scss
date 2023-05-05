@@ -9,7 +9,7 @@
 .collection-link {
     color: #626262;
     text-decoration: none!important;
-
+    cursor: pointer;
     &:hover {
         color: $color-theme-1;
     }

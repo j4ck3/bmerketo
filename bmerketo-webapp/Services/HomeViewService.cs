@@ -6,10 +6,12 @@ namespace bmerketo_webapp.Services;
 public class HomeViewService
 {
     private readonly ProductService _productService;
+    private readonly ProductCategoryService _categoryService;
 
-    public HomeViewService(ProductService productService)
+    public HomeViewService(ProductService productService, ProductCategoryService categoryService)
     {
         _productService = productService;
+        _categoryService = categoryService;
     }
 
     public async Task<HomeIndexViewModel> Populate()
@@ -31,8 +33,7 @@ public class HomeViewService
             BestCollection = new CollectionsViewModel
             {
                 Title = "Best Collection",
-                Categories = new List<string> { "All", "Bag", "Dress", "Decoration", "Essentials", "Interior", "Laptops", "Mobile", "Beauty" },
-                //populate categories with real categoris
+                Categories = await _categoryService.GetAllAsync(),
                 GridItems = await _productService.GetAllAsync("Shoes")
             },
 

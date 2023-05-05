@@ -26,9 +26,19 @@ namespace bmerketo_webapp.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Products()
+        public async Task<IActionResult> Products(string? category)
         {
             ViewData["Title"] = "All Products";
+            List<ItemViewModel>? _items;
+
+            if (!string.IsNullOrEmpty(category))
+            {
+                _items = await _productService.GetAllAsync(category);
+            }
+            else
+            {
+                _items = await _productService.GetAllAsync("");
+            }
 
             var viewModel = new ProductsViewModel
             {
@@ -38,9 +48,8 @@ namespace bmerketo_webapp.Controllers
                     Content = "Load More",
                     Url = ""
                 },
-                Items = await _productService.GetAllAsync("")
+                Items = _items
             };
-
             return View(viewModel);
         }
     }
