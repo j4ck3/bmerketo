@@ -101,15 +101,14 @@ public class AuthService
     }
 
 
-    //public async Task<bool> UpdateAsync(ManageAccountViewModel viewModel)
-    //{
-    //    var _user = await _identityContext.UserProfiles.Include(x => x.User).FirstOrDefaultAsync(x => x.UserId == );
+    public async Task UpdateAsync(ManageAccountViewModel viewModel)
+    {
+        var _user = await _identityContext.UserProfiles.Include(x => x.User).FirstOrDefaultAsync(x => x.UserId == viewModel.Id);
 
-    //    //mapping
-    //    IdentityUser identityUser = viewModel;
-    //    UserProfileEntity userProfileEntity = viewModel;
-    //    userProfileEntity.UserId = identityUser.Id;
+        //mapping
+        IdentityUser identityUser = viewModel;
+        UserProfileEntity userProfileEntity = viewModel;
+        userProfileEntity.UserId = identityUser.Id;
 
-
-    //}
+    }
 }

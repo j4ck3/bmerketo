@@ -1,7 +1,9 @@
-﻿using bmerketo_webapp.Models.Schemas;
+﻿using bmerketo_webapp.Contexts;
+using bmerketo_webapp.Models.Schemas;
 using bmerketo_webapp.Services;
 using bmerketo_webapp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace bmerketo_webapp.Controllers;
@@ -15,13 +17,17 @@ public class AdminController : Controller
     private readonly AuthService _authService;
     private readonly TagService _tagService;
     private readonly ProductCategoryService _productCategoryService;
+    private readonly UserService _userService;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public AdminController(ProductService productService, AuthService authService, TagService tagService, ProductCategoryService productCategoryService)
+    public AdminController(ProductService productService, AuthService authService, TagService tagService, ProductCategoryService productCategoryService, UserService userService, UserManager<IdentityUser> userManager)
     {
         _productService = productService;
         _authService = authService;
         _tagService = tagService;
         _productCategoryService = productCategoryService;
+        _userService = userService;
+        _userManager = userManager;
     }
     #endregion
 
@@ -33,22 +39,47 @@ public class AdminController : Controller
         return View();
     }
 
+    public IActionResult Users()
+    {
+        ViewData["Title"] = "Users";
+        return View();
+    }
     public IActionResult CreateUser()
     {
         ViewData["Title"] = "New User";
         return View();
     }
 
+    public async Task<IActionResult> EditUser(string userId)
+    {
+        ViewData["Title"] = "Edit User";
+        ViewData["Id"] = $"{userId}";
+        var userProfile = await _userService.GetAsync(userId);
+
+        var _userRoles = await _userManager.GetRolesAsync(userProfile.User);
+
+        var viewModel = new ManageAccountViewModel
+        {
+            Id = userProfile.UserId,
+            FirstName = userProfile.FirstName,
+            LastName = userProfile.LastName,
+
+            Email = userProfile.User.UserName,
+            PhoneNumber = userProfile.User.PhoneNumber,
+
+            StreetName = userProfile.Address.StreetName,
+            PostalCode = userProfile.Address.PostalCode,
+            City = userProfile.Address.City,
+        };
+
+        
+        return View(viewModel);
+    }
+
     public async Task<IActionResult> CreateProduct()
     {
         ViewBag.Tags = await _tagService.GetTagsToFormAsync();
         ViewData["Title"] = "New Prodcut";
-        return View();
-    }
-
-    public IActionResult Users()
-    {
-        ViewData["Title"] = "Users";
         return View();
     }
 
@@ -82,6 +113,8 @@ public class AdminController : Controller
         return View();
     }
 
+
+
     #endregion
 
     [HttpPost]
@@ -101,7 +134,6 @@ public class AdminController : Controller
         }
         return View(viewModel);
     }
-
 
     [HttpPost]
     public async Task<IActionResult> CreateProduct(CreateProductFormModel viewModel, string[] tags)
@@ -128,8 +160,6 @@ public class AdminController : Controller
         ViewBag.Tags = await _tagService.GetTagsToFormAsync(tags);
         return View(viewModel);
     }
-
-
 
     [HttpPost]
     public async Task<IActionResult> CreateTag(TagSchema schema)
@@ -177,4 +207,23 @@ public class AdminController : Controller
         }
         return View(viewmodel);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> EditUser(ManageAccountViewModel viewModel)
+    {
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                await _authService.UpdateAsync(viewModel);
+            }
+            catch
+            {
+                ModelState.AddModelError("", "Something went wrong when trying to update the user.");
+            }
+        }
+        return View(viewModel);
+    }
+
+
 }

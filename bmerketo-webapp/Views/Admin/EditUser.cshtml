@@ -1,0 +1,58 @@
+﻿@model ManageAccountViewModel
+@{
+    var id = ViewBag.Id;
+}
+
+<partial name="/Views/Shared/Partials/Sections/_AdminNav.cshtml" />
+<section class="contact-form">
+    <div class="container">
+        <h2 class="title mb-3">Edit User</h2>
+        <form id="register-form" method="POST" asp-action="edituser" novalidate>
+            <div asp-validation-summary="ModelOnly" class="error"></div>
+            <div>
+                <input asp-for="Id" hidden disabled value="@id" type="text">
+            </div>
+            <div class="firstName form-group mb-3">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" id="firstName" type="text">
+                <span asp-validation-for="FirstName" class="error"></span>
+            </div>
+            <div class="lastName form-group mb-3">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" id="lastName" type="text">
+                <span asp-validation-for="LastName" class="error"></span>
+            </div>
+            <div class="streetName form-group mb-3">
+                <label asp-for="StreetName"></label>
+                <input asp-for="StreetName" id="streetName" type="text">
+                <span asp-validation-for="StreetName" class="error"></span>
+            </div>
+            <div class="postalCode form-group mb-3">
+                <label asp-for="PostalCode"></label>
+                <input asp-for="PostalCode" id="postalCode" type="text">
+                <span asp-validation-for="PostalCode" class="error"></span>
+            </div>
+            <div class="city form-group mb-3">
+                <label asp-for="City"></label>
+                <input asp-for="City" id="city" type="text">
+                <span asp-validation-for="City" class="error"></span>
+            </div>
+            <div class="mobile form-group mb-3">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" id="mobile" type="text">
+                <span asp-validation-for="PhoneNumber" class="error"></span>
+            </div>
+            <div class="company form-group mb-3">
+                <label asp-for="Company"></label>
+                <input asp-for="Company" id="company" type="text">
+                <span asp-validation-for="Company" class="error"></span>
+            </div>
+            <div class="email form-group mb-3">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" id="email" type="email">
+                <span asp-validation-for="Email" class="error"></span>
+            </div>
+            <button class="btn-theme">Submit</button>
+        </form>
+    </div>
+</section>
