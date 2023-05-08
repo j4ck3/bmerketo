@@ -1,0 +1,24 @@
+﻿
+<partial name="/Views/Shared/Partials/Sections/_AdminNav.cshtml" />
+
+<div class="container d-flex justify-content-center align-items-center mt-5">
+    <div class="content-list mt-5">
+        <h3 class="collection-title">Categories</h3>
+        @if (ViewBag.Categories != null)
+        {
+            <table>
+                <tbody>
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <tr>
+                            <td>@category.Name</td>
+                            <td>
+                                <a class="admin-nav-link" asp-controller="admin" asp-action="deletecategory">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

@@ -14,12 +14,14 @@ public class AdminController : Controller
     private readonly ProductService _productService;
     private readonly AuthService _authService;
     private readonly TagService _tagService;
+    private readonly ProductCategoryService _productCategoryService;
 
-    public AdminController(ProductService productService, AuthService authService, TagService tagService)
+    public AdminController(ProductService productService, AuthService authService, TagService tagService, ProductCategoryService productCategoryService)
     {
         _productService = productService;
         _authService = authService;
         _tagService = tagService;
+        _productCategoryService = productCategoryService;
     }
     #endregion
 
@@ -65,6 +67,18 @@ public class AdminController : Controller
     {
 
         ViewData["Title"] = "Create tag";
+        return View();
+    }
+
+    public async Task<IActionResult> Categories()
+    {
+        ViewData["Title"] = "Categories";
+        ViewBag.Categories = await _productCategoryService.GetAllAsync();
+        return View();
+    }
+    public IActionResult CreateCategory()
+    {
+        ViewData["Title"] = "Create Category";
         return View();
     }
 
@@ -138,5 +152,29 @@ public class AdminController : Controller
                 ModelState.AddModelError("", "A tag with the same name already exists.");
         }
         return View(schema);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateCategory(CreateProductCategoryViewModel viewmodel)
+    {
+        if (ModelState.IsValid)
+        {
+            var result = await _productCategoryService.GetAsync(viewmodel.Name);
+
+            if (result == null)
+            {
+                try
+                {
+                    await _productCategoryService.CreateAsync(viewmodel);
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "Something went wrong when trying to create the category");
+                }
+            }
+            else
+                ModelState.AddModelError("", "A category with the same name already exists.");
+        }
+        return View(viewmodel);
     }
 }

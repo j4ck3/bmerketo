@@ -1,0 +1,17 @@
+﻿@model CreateProductCategoryViewModel
+<partial name="/Views/Shared/Partials/Sections/_AdminNav.cshtml" />
+<section class="contact-form">
+    <div class="container">
+        <div class="title mb-4">Create Category</div>
+
+        <form method="POST" asp-action="createcategory" novalidate>
+            <div asp-validation-summary="ModelOnly" class="error"></div>
+            <div class="form-group mb-4">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" type="text">
+                <span asp-validation-for="Name"></span>
+            </div>
+            <button type="submit" class="btn-theme">Submit</button>
+        </form>
+    </div>
+</section>

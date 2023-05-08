@@ -12,6 +12,8 @@ namespace bmerketo_webapp.Models.Entities
 
         public ICollection<ProductEntity>? Products { get; set; } = new HashSet<ProductEntity>();
 
+
+
         public static implicit operator ProductCategorySchema(ProductCategoryEntity model)
         {
             return new ProductCategorySchema

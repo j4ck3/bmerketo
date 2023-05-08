@@ -1,6 +1,7 @@
 ﻿using bmerketo_webapp.Models.Entities;
 using bmerketo_webapp.Models.Schemas;
 using bmerketo_webapp.Repos;
+using bmerketo_webapp.ViewModels;
 
 namespace bmerketo_webapp.Services
 {
@@ -14,22 +15,35 @@ namespace bmerketo_webapp.Services
             _categoryRepo = categoryReop;
         }
 
-        public async Task<ProductCategoryEntity> GetOrCreateAsync(ProductCategoryEntity category)
+        public async Task<ProductCategoryEntity> GetAsync(string name)
         {
-            var categoryEntity = await _categoryRepo.GetAsync(x => x.Id == category.Id);
-            categoryEntity ??= await _categoryRepo.AddAsync(new ProductCategoryEntity { CategoryName = category.CategoryName}); 
-            return categoryEntity;
+            try 
+            {
+               return await _categoryRepo.GetAsync(x => x.CategoryName == name);
+            }
+            catch { return null!; }
+        }
+
+        public async Task<ProductCategoryEntity> CreateAsync(CreateProductCategoryViewModel viewmodel)
+        {
+            try
+            {
+               return await _categoryRepo.AddAsync(viewmodel);
+            }
+            catch { return null!; }
         }
 
         public async Task<IEnumerable<ProductCategorySchema>> GetAllAsync()
         {
-            var categories = new List<ProductCategorySchema>();
+            try
+            {
+                var categories = new List<ProductCategorySchema>();
+                foreach (var item in await _categoryRepo.GetAllAsync())
+                    categories.Add(new ProductCategorySchema { Value = item.Id, Name = item.CategoryName });
 
-            foreach (var item in await _categoryRepo.GetAllAsync())
-                categories.Add(new ProductCategorySchema { Value = item.Id, Name = item.CategoryName });
-
-            return categories;
+                return categories;
+            }
+            catch { return null!; }
         }
     }
 }
- 
