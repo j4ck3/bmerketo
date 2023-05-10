@@ -9,9 +9,7 @@
         <h2 class="title mb-3">Edit User</h2>
         <form id="register-form" method="POST" asp-action="edituser" novalidate>
             <div asp-validation-summary="ModelOnly" class="error"></div>
-            <div>
-                <input asp-for="Id" hidden disabled value="@id" type="text">
-            </div>
+            <input type="text" asp-for="Id" hidden disabled value="@id" />
             <div class="firstName form-group mb-3">
                 <label asp-for="FirstName"></label>
                 <input asp-for="FirstName" id="firstName" type="text">
@@ -52,6 +50,18 @@
                 <input asp-for="Email" id="email" type="email">
                 <span asp-validation-for="Email" class="error"></span>
             </div>
+
+            <p class="title mb-3">Manage User roles</p>
+            <div class="mb-3">
+                @foreach (SelectListItem role in ViewBag.UserRoles)
+                {
+                    <div class="mb-1">
+                        <input type="checkbox" value="@role.Value" checked="@role.Selected" name="roles" id="userrole-@role.Value">
+                        <label for="userrole-@role.Value" class="small form-check-label no-select">@role.Text</label>
+                    </div>
+                }
+            </div>
+
             <button class="btn-theme">Submit</button>
         </form>
     </div>

@@ -1,10 +1,12 @@
-﻿using bmerketo_webapp.Contexts;
+﻿using bmerketo_webapp.Models.DTOS;
 using bmerketo_webapp.Models.Schemas;
 using bmerketo_webapp.Services;
 using bmerketo_webapp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace bmerketo_webapp.Controllers;
 
@@ -19,8 +21,9 @@ public class AdminController : Controller
     private readonly ProductCategoryService _productCategoryService;
     private readonly UserService _userService;
     private readonly UserManager<IdentityUser> _userManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
 
-    public AdminController(ProductService productService, AuthService authService, TagService tagService, ProductCategoryService productCategoryService, UserService userService, UserManager<IdentityUser> userManager)
+    public AdminController(ProductService productService, AuthService authService, TagService tagService, ProductCategoryService productCategoryService, UserService userService, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
     {
         _productService = productService;
         _authService = authService;
@@ -28,6 +31,7 @@ public class AdminController : Controller
         _productCategoryService = productCategoryService;
         _userService = userService;
         _userManager = userManager;
+        _roleManager = roleManager;
     }
     #endregion
 
@@ -54,9 +58,26 @@ public class AdminController : Controller
     {
         ViewData["Title"] = "Edit User";
         ViewData["Id"] = $"{userId}";
+
         var userProfile = await _userService.GetAsync(userId);
 
-        var _userRoles = await _userManager.GetRolesAsync(userProfile.User);
+
+        var roles = new List<SelectListItem>();
+        var user = await _userManager.FindByIdAsync(userId);
+
+        foreach (var role in await _roleManager.Roles.ToListAsync())
+        {
+            var assigned = await _userManager.IsInRoleAsync(user, role.Name);
+
+            roles.Add(new SelectListItem
+            {
+                Value = role.Name,
+                Text = role.Name,
+                Selected = assigned
+            });
+        }
+
+        ViewBag.UserRoles = roles;
 
         var viewModel = new ManageAccountViewModel
         {
@@ -71,7 +92,6 @@ public class AdminController : Controller
             PostalCode = userProfile.Address.PostalCode,
             City = userProfile.Address.City,
         };
-
         
         return View(viewModel);
     }
@@ -142,22 +162,36 @@ public class AdminController : Controller
         {
             var productEntity = await _productService.CreateAsync(viewModel);
 
-            if(productEntity != null)
+            if (productEntity != null)
             {
-                if (await _tagService.CreateProductTagsAsync(productEntity, tags))
-                {
-                    if (viewModel.Image != null)
-                        await _productService.UploadImageAsync(productEntity, viewModel.Image);
+                if (!await _tagService.CreateProductTagsAsync(productEntity, tags))
+                    ModelState.AddModelError("", "Something went wrong while trying to add the tags to the product.");
 
-                    return RedirectToAction("products");
-                }
-                ModelState.AddModelError("", "Something went wrong while trying to add the tags to the product.");
+                if (viewModel.Image != null)
+                   await _productService.UploadImageAsync(productEntity, viewModel.Image);
+
+                return RedirectToAction("products");
             }
             ModelState.AddModelError("", "Something went wrong while trying to create the product");
         }
 
         ModelState.AddModelError("", "Please Validate the form");
         ViewBag.Tags = await _tagService.GetTagsToFormAsync(tags);
+        return View(viewModel);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> EditUser(ManageAccountViewModel viewModel, string[] roles)
+    {
+        if (ModelState.IsValid)
+        {
+            await _userService.UpdateUserRolesAsync(viewModel, roles);
+            await _userService.UpdateUserAsync(viewModel);
+
+            ModelState.AddModelError("", "Something went wrong when trying to update the user.");
+
+            return RedirectToAction("users");
+        }
         return View(viewModel);
     }
 
@@ -170,14 +204,12 @@ public class AdminController : Controller
             
             if (result == null)
             {
-                try
-                {
-                    await _tagService.CreateAsync(schema);
-                }
-                catch 
-                {
-                    ModelState.AddModelError("", "Something went wrong when trying to create the Tag");
-                }
+                var created = await _tagService.CreateAsync(schema);
+                if (created != null)
+                    return View();
+
+                ModelState.AddModelError("", "Something went wrong when trying to create the Tag");
+                
             }else
                 ModelState.AddModelError("", "A tag with the same name already exists.");
         }
@@ -193,14 +225,12 @@ public class AdminController : Controller
 
             if (result == null)
             {
-                try
-                {
-                    await _productCategoryService.CreateAsync(viewmodel);
-                }
-                catch
-                {
-                    ModelState.AddModelError("", "Something went wrong when trying to create the category");
-                }
+                var created = await _productCategoryService.CreateAsync(viewmodel);
+                if (created != null)
+                    return View();
+
+                ModelState.AddModelError("", "Something went wrong when trying to create the category");
+                
             }
             else
                 ModelState.AddModelError("", "A category with the same name already exists.");
@@ -208,22 +238,7 @@ public class AdminController : Controller
         return View(viewmodel);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> EditUser(ManageAccountViewModel viewModel)
-    {
-        if (ModelState.IsValid)
-        {
-            try
-            {
-                await _authService.UpdateAsync(viewModel);
-            }
-            catch
-            {
-                ModelState.AddModelError("", "Something went wrong when trying to update the user.");
-            }
-        }
-        return View(viewModel);
-    }
+
 
 
 }

@@ -77,21 +77,6 @@ public class AccountController : Controller
 
         return RedirectToAction("Index", "Home");
     }
-
-
-    //[HttpGet]
-    //[Authorize]
-    //public async Task<IActionResult> Manage(ManageAccountViewModel viewModel)
-    //{
-    //    if (ModelState.IsValid)
-    //    {
-    //        if (await _authService.UpdateAsync(viewModel))
-    //            return RedirectToAction("Index");
-
-    //        ModelState.AddModelError("", "Something went wrong trying to update your profile.");
-    //    }
-    //    return View(viewModel);
-    //}
 }
 
 

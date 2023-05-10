@@ -38,14 +38,11 @@ public class ManageAccountViewModel
     [Display(Name = "Company")]
     public string? Company { get; set; }
 
-    [Display(Name = "Välj en kategori")]
-    [Required(ErrorMessage = "Du måste välja en kategori")]
-    public string CategoryId { get; set; } = null!;
-
     public static implicit operator IdentityUser(ManageAccountViewModel manageUserViewModel)
     {
         return new IdentityUser
         {
+            Id = manageUserViewModel.Id,
             UserName = manageUserViewModel.Email,
             Email = manageUserViewModel.Email,
             PhoneNumber = manageUserViewModel.PhoneNumber,
@@ -56,6 +53,7 @@ public class ManageAccountViewModel
     {
         return new UserProfileEntity
         {
+            UserId = manageUserViewModel.Id,
             FirstName = manageUserViewModel.FirstName,
             LastName = manageUserViewModel.LastName,
             Company = manageUserViewModel.Company,

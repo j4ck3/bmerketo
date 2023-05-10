@@ -99,16 +99,4 @@ public class AuthService
         await _signInManager.SignOutAsync();
         return _signInManager.IsSignedIn(user);
     }
-
-
-    public async Task UpdateAsync(ManageAccountViewModel viewModel)
-    {
-        var _user = await _identityContext.UserProfiles.Include(x => x.User).FirstOrDefaultAsync(x => x.UserId == viewModel.Id);
-
-        //mapping
-        IdentityUser identityUser = viewModel;
-        UserProfileEntity userProfileEntity = viewModel;
-        userProfileEntity.UserId = identityUser.Id;
-
-    }
 }
