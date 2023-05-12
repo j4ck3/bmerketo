@@ -35,14 +35,12 @@
                                 @if(user.Roles != null) {
                                     @foreach (var role in user.Roles)
                                     {
-                                        @role
+                                        <div class="px-1">@role</div>
                                     }
                                 }
                             </td>
                             <td>
                                 <a class="admin-nav-link" asp-controller="admin" asp-action="edituser" asp-route-userId="@user.Id"><i class="fa-solid fa-user-pen"></i> Edit user</a>
-                               @* <a class="admin-nav-link" asp-controller="admin" asp-action="deleteuser"><i class="fa-solid fa-user-xmark"></i> Delete user</a>
-                            </td>*@
                         </tr>
                     }
                 </tbody>

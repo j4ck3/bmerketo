@@ -1,4 +1,5 @@
 ﻿using bmerketo_webapp.Contexts;
+using bmerketo_webapp.Migrations.Identity;
 using bmerketo_webapp.Models.DTOS;
 using bmerketo_webapp.Models.Entities;
 using bmerketo_webapp.ViewModels;
@@ -52,67 +53,128 @@ public class UserService
         return null!;
     }
 
-    public async Task<bool> UpdateUserAsync(ManageAccountViewModel viewModel)
+    public async Task<bool> UpdateUserAsync(ManageAccountViewModel viewModel, string[] roles)
+    {
+        if (await UpdateUserIdentityAsync(viewModel))
+            if (await UpdateUserRolesAsync(viewModel, roles))
+            {
+
+                UserProfileEntity userProfileEntity = viewModel;
+                var _addressEntity = await UserProfileAddress(viewModel);
+                if (_addressEntity != null)
+                {
+                    if (_addressEntity.StreetName != null && _addressEntity.PostalCode != null && _addressEntity.City != null)
+                    {
+                        userProfileEntity.Address = _addressEntity;
+                        userProfileEntity.AddressId = null!;
+                    }
+                    else
+                    {
+                        userProfileEntity.AddressId = _addressEntity.Id!;
+                        userProfileEntity.Address = null!;
+                    }
+                }
+                else
+                {
+                    userProfileEntity.Address = null!;
+                    userProfileEntity.AddressId = null!;
+                }
+                  
+
+
+                var result = await UpdateUserProfileAsync(userProfileEntity);
+
+                if(result != null)
+                    return true;
+            }
+        return false; 
+    }
+
+    public async Task<UserProfileEntity> UpdateUserProfileAsync(UserProfileEntity entity)
     {
         try
         {
-            IdentityUser identityUser = viewModel;
-            identityUser.Id = viewModel.Id;
-            UserProfileEntity userProfileEntity = viewModel;
-            userProfileEntity.UserId = identityUser.Id;
+            _identityContext.Update(entity);
+            await _identityContext.SaveChangesAsync();
+            return entity;
+        }
+        catch { return null!; }
+    }
 
-            // ------- Check if address exists. If: assign found addressEntity.Id to userProfile.AddressId  If Not: create a new AddressEntity and later save it to db
-            if (viewModel.StreetName != null && viewModel.PostalCode != null && viewModel.City != null)
+    public async Task<bool> UpdateUserIdentityAsync(ManageAccountViewModel viewModel)
+    {
+        try {
+            var user = await _userManager.FindByIdAsync(viewModel.Id);
+            user.Email = viewModel.Email;
+            user.UserName = viewModel.Email;
+            user.PhoneNumber = viewModel.PhoneNumber;
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
             {
-                var _addressEntity = await _identityContext.Addresses.FirstOrDefaultAsync(x => x.StreetName == viewModel.StreetName && x.PostalCode == viewModel.PostalCode && x.City == viewModel.City);
-                if (_addressEntity != null)
-                {
-                    userProfileEntity.AddressId = _addressEntity.Id;
-                    userProfileEntity.Address = null!;
-                }
-                else
-                    userProfileEntity.Address = new Models.Entities.AddressEntity
-                    {
-                        StreetName = viewModel.StreetName,
-                        PostalCode = viewModel.PostalCode,
-                        City = viewModel.City
-                    };
+                return true;
             }
             else
             {
-                userProfileEntity.AddressId = null!;
-                userProfileEntity.Address = null!;
+                return false;
             }
-            _identityContext.UserProfiles.Update(userProfileEntity);
-            await _userManager.UpdateAsync(identityUser);
-            await _identityContext.SaveChangesAsync();
-            return true;
         }
         catch { return false; }
     }
 
-    public async Task<bool> UpdateUserRolesAsync(IdentityUser user, string[] roles)
+    public async Task<AddressEntity> UserProfileAddress(ManageAccountViewModel viewModel)
+    {
+        if (viewModel.StreetName != null && viewModel.PostalCode != null && viewModel.City != null)
+        {
+            AddressEntity addressEntity = new();
+
+            var _addressEntity = await _identityContext.Addresses.FirstOrDefaultAsync(x => x.StreetName == viewModel.StreetName && x.PostalCode == viewModel.PostalCode && x.City == viewModel.City);
+            if (_addressEntity != null)
+            {
+                addressEntity.Id = _addressEntity.Id;
+                return addressEntity;
+            }
+            else
+            {
+                addressEntity.PostalCode = viewModel.PostalCode;
+                addressEntity.City = viewModel.City;
+                addressEntity.StreetName = viewModel.StreetName;
+                return addressEntity;
+            }
+        }
+        return null!;
+    }
+
+    public async Task<bool> UpdateUserRolesAsync(ManageAccountViewModel viewModel, string[] roles)
     {
         try
         {
-            var currentRoles = await _userManager.GetRolesAsync(user);
-
-            // ------ Remove roles that are unchecked
-            var rolesToRemove = currentRoles.Except(roles);
-            foreach (var role in rolesToRemove)
+            var user = await _userManager.FindByIdAsync(viewModel.Id);
+            if (user != null)
             {
-                await _userManager.RemoveFromRoleAsync(user, role);
-            }
+                var currentRoles = await _userManager.GetRolesAsync(user);
 
-            // ------- Add roles that are checked
-            var rolesToAdd = roles.Except(currentRoles);
-            foreach (var role in rolesToAdd)
-            {
-                await _userManager.AddToRoleAsync(user, role);
+                // ------ Remove roles that are unchecked
+                var rolesToRemove = currentRoles.Except(roles);
+                foreach (var role in rolesToRemove)
+                {
+                    await _userManager.RemoveFromRoleAsync(user, role);
+                }
+
+                // ------- Add roles that are checked
+                var rolesToAdd = roles.Except(currentRoles);
+                foreach (var role in rolesToAdd)
+                {
+                    await _userManager.AddToRoleAsync(user, role);
+                }
+                return true;
             }
-            return true;
+            else { return false; }
         }
         catch { return false; }
     }
+
+
 
 }

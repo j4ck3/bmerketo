@@ -6,7 +6,7 @@ namespace bmerketo_webapp.ViewModels;
 
 public class ManageAccountViewModel
 {
-    public string Id = null!;
+    public string Id { get; set; } = null!;
 
     [Required(ErrorMessage = "You must enter a First Name")]
     [MinLength(2, ErrorMessage = "First Name must be atleast {1} characters in length.")]
@@ -29,6 +29,7 @@ public class ManageAccountViewModel
     [Display(Name = "Street Name")]
     public string? StreetName { get; set; }
 
+    [MaxLength(6)]
     [Display(Name = "Postal Code")]
     public string? PostalCode { get; set; }
 
@@ -38,30 +39,30 @@ public class ManageAccountViewModel
     [Display(Name = "Company")]
     public string? Company { get; set; }
 
-    public static implicit operator IdentityUser(ManageAccountViewModel manageUserViewModel)
+    public static implicit operator IdentityUser(ManageAccountViewModel viewModel)
     {
         return new IdentityUser
         {
-            Id = manageUserViewModel.Id,
-            UserName = manageUserViewModel.Email,
-            Email = manageUserViewModel.Email,
-            PhoneNumber = manageUserViewModel.PhoneNumber,
+            Id = viewModel.Id,
+            UserName = viewModel.Email,
+            Email = viewModel.Email,
+            PhoneNumber = viewModel.PhoneNumber,
         };
     }
 
-    public static implicit operator UserProfileEntity(ManageAccountViewModel manageUserViewModel)
+    public static implicit operator UserProfileEntity(ManageAccountViewModel viewModel)
     {
         return new UserProfileEntity
         {
-            UserId = manageUserViewModel.Id,
-            FirstName = manageUserViewModel.FirstName,
-            LastName = manageUserViewModel.LastName,
-            Company = manageUserViewModel.Company,
+            UserId = viewModel.Id,
+            FirstName = viewModel.FirstName,
+            LastName = viewModel.LastName,
+            Company = viewModel.Company,
             Address = new Models.Entities.AddressEntity
             {
-                StreetName = manageUserViewModel.StreetName,
-                City = manageUserViewModel.City,
-                PostalCode = manageUserViewModel.PostalCode
+                StreetName = viewModel.StreetName,
+                City = viewModel.City,
+                PostalCode = viewModel.PostalCode
             }
         };
     }

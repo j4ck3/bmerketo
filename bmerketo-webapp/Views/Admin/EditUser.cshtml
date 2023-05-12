@@ -1,15 +1,14 @@
 ﻿@model ManageAccountViewModel
-@{
-    var id = ViewBag.Id;
-}
 
 <partial name="/Views/Shared/Partials/Sections/_AdminNav.cshtml" />
 <section class="contact-form">
     <div class="container">
         <h2 class="title mb-3">Edit User</h2>
-        <form id="register-form" method="POST" asp-action="edituser" novalidate>
+        <form id="register-form" method="POST" asp-action="EditUser" novalidate>
             <div asp-validation-summary="ModelOnly" class="error"></div>
-            <input type="text" asp-for="Id" hidden disabled value="@id" />
+
+            <input type="hidden" name="id" value="@Model.Id" />
+
             <div class="firstName form-group mb-3">
                 <label asp-for="FirstName"></label>
                 <input asp-for="FirstName" id="firstName" type="text">
@@ -51,17 +50,19 @@
                 <span asp-validation-for="Email" class="error"></span>
             </div>
 
-            <p class="title mb-3">Manage User roles</p>
-            <div class="mb-3">
-                @foreach (SelectListItem role in ViewBag.UserRoles)
-                {
-                    <div class="mb-1">
-                        <input type="checkbox" value="@role.Value" checked="@role.Selected" name="roles" id="userrole-@role.Value">
-                        <label for="userrole-@role.Value" class="small form-check-label no-select">@role.Text</label>
-                    </div>
-                }
-            </div>
-
+            @if(ViewBag.UserRoles != null)
+            {
+                <p class="title mb-3">Manage User roles</p>
+                <div class="mb-3">
+                    @foreach (SelectListItem role in ViewBag.UserRoles)
+                    {
+                        <div class="mb-1">
+                            <input type="checkbox" value="@role.Value" checked="@role.Selected" name="roles" id="userrole-@role.Value">
+                            <label for="userrole-@role.Value" class="small form-check-label no-select">@role.Text</label>
+                        </div>
+                    }
+                </div>
+            }
             <button class="btn-theme">Submit</button>
         </form>
     </div>

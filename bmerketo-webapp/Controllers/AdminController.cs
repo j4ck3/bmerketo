@@ -57,43 +57,50 @@ public class AdminController : Controller
     public async Task<IActionResult> EditUser(string userId)
     {
         ViewData["Title"] = "Edit User";
-        ViewData["Id"] = $"{userId}";
 
+        //gör säkrare med att inte skicka all user information
         var userProfile = await _userService.GetAsync(userId);
 
 
-        var roles = new List<SelectListItem>();
-        var user = await _userManager.FindByIdAsync(userId);
-
-        foreach (var role in await _roleManager.Roles.ToListAsync())
+        if (userProfile != null)
         {
-            var assigned = await _userManager.IsInRoleAsync(user, role.Name);
+            var roles = new List<SelectListItem>();
+            var user = await _userManager.FindByIdAsync(userId);
 
-            roles.Add(new SelectListItem
+            foreach (var role in await _roleManager.Roles.ToListAsync())
             {
-                Value = role.Name,
-                Text = role.Name,
-                Selected = assigned
-            });
+                var assigned = await _userManager.IsInRoleAsync(user, role.Name);
+
+                roles.Add(new SelectListItem
+                {
+                    Value = role.Name,
+                    Text = role.Name,
+                    Selected = assigned
+                });
+            }
+
+            ViewBag.UserRoles = roles;
+
+            var viewModel = new ManageAccountViewModel
+            {
+                Id = userProfile.UserId,
+                FirstName = userProfile.FirstName,
+                LastName = userProfile.LastName,
+                Email = userProfile.User.UserName,
+                PhoneNumber = userProfile.User.PhoneNumber,
+                Company = userProfile.Company
+
+            };
+            if (userProfile.Address != null)
+            {
+                viewModel.StreetName = userProfile.Address.StreetName;
+                viewModel.PostalCode = userProfile.Address.PostalCode;
+                viewModel.City = userProfile.Address.City;
+            }
+
+            return View(viewModel);
         }
-
-        ViewBag.UserRoles = roles;
-
-        var viewModel = new ManageAccountViewModel
-        {
-            Id = userProfile.UserId,
-            FirstName = userProfile.FirstName,
-            LastName = userProfile.LastName,
-
-            Email = userProfile.User.UserName,
-            PhoneNumber = userProfile.User.PhoneNumber,
-
-            StreetName = userProfile.Address.StreetName,
-            PostalCode = userProfile.Address.PostalCode,
-            City = userProfile.Address.City,
-        };
-        
-        return View(viewModel);
+        return NotFound();
     }
 
     public async Task<IActionResult> CreateProduct()
@@ -179,18 +186,16 @@ public class AdminController : Controller
         ViewBag.Tags = await _tagService.GetTagsToFormAsync(tags);
         return View(viewModel);
     }
-
+     
     [HttpPost]
     public async Task<IActionResult> EditUser(ManageAccountViewModel viewModel, string[] roles)
     {
         if (ModelState.IsValid)
         {
-            await _userService.UpdateUserRolesAsync(viewModel, roles);
-            await _userService.UpdateUserAsync(viewModel);
+            if (await _userService.UpdateUserAsync(viewModel, roles))
+                return RedirectToAction("Users");
 
             ModelState.AddModelError("", "Something went wrong when trying to update the user.");
-
-            return RedirectToAction("users");
         }
         return View(viewModel);
     }

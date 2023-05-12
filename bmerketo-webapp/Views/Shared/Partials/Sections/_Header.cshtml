@@ -8,7 +8,7 @@
                 <a class="link" asp-controller="home" asp-action="contact">CONTACT</a>
                 @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                 {
-                   <a class="link" asp-controller="admin" asp-action="products">DASHBOARD</a>
+                   <a class="link" asp-controller="admin" asp-action="users">DASHBOARD</a>
                 }
             </nav>
             <nav class="menu-icons">
