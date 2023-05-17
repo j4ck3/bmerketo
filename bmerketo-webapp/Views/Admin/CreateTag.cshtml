@@ -4,12 +4,13 @@
     <div class="container">
         <div class="title mb-4">Create Tag</div>
 
-        <form method="POST" asp-action="createtag" novalidate>
+        <form method="POST" class="validate-form" asp-action="createtag" novalidate>
             <div asp-validation-summary="ModelOnly" class="error"></div>
             <div class="form-group mb-4">
                 <label asp-for="Name"></label>
-                <input asp-for="Name" type="text">
+                <input required asp-for="Name" type="text">
                 <span asp-validation-for="Name"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <button type="submit" class="btn-theme">Submit</button>
         </form>

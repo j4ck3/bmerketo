@@ -1,5 +1,4 @@
 ﻿using bmerketo_webapp.Contexts;
-using bmerketo_webapp.Migrations.Identity;
 using bmerketo_webapp.Models.DTOS;
 using bmerketo_webapp.Models.Entities;
 using bmerketo_webapp.ViewModels;
@@ -112,13 +111,11 @@ public class UserService
             var result = await _userManager.UpdateAsync(user);
 
             if (result.Succeeded)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+                 return true;
+            
+
+            return false;
+            
         }
         catch { return false; }
     }

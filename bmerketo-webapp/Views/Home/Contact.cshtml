@@ -4,35 +4,40 @@
     <div class="container">
         <div class="title mb-3">Write something</div>
 
-        <form id="contact-form" method="POST" asp-action="contact" novalidate>
+        <form id="contact-form" class="validate-form" method="POST" asp-action="contact" novalidate>
             <div asp-validation-summary="ModelOnly" class="error"></div>
             <div class="name form-group mb-3">
                 <label asp-for="FirstName"></label>
                 <span>*</span>
-                <input asp-for="FirstName">
+                <input minlength="2" custommaxlength="50" required asp-for="FirstName">
                 <span asp-validation-for="FirstName" class="error"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="email form-group mb-3">
                 <label asp-for="Email"></label>
                 <span>*</span>
-                <input asp-for="Email" type="email">
+                <input pattern="[a-zA-Z0-9._%+-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" asp-for="Email" type="text">
                 <span asp-validation-for="Email" class="error"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="phoneNumber form-group mb-3">
                 <label asp-for="PhoneNumber"></label>
                 <input asp-for="PhoneNumber">
                 <span asp-validation-for="PhoneNumber" class="error"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="companyName form-group mb-3">
                 <label asp-for="Company"></label>
-                <input asp-for="Company">
+                <input custommaxlength="50" asp-for="Company">
                 <span asp-validation-for="Company" class="error"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="message form-group mb-3">
                 <label asp-for="Message"></label>
                 <span>*</span>
-                <input asp-for="Message">
+                <input required minlength="10" asp-for="Message">
                 <span asp-validation-for="Message" class="error"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="terms form-checkbox-group mb-3">
                 <label class="custom-checkbox">

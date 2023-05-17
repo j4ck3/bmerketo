@@ -4,31 +4,38 @@
     <div class="container">
         <div class="title mb-4">Create Product</div>
 
-        <form method="POST" enctype="multipart/form-data" asp-action="createproduct" novalidate>
+        <form method="POST" class="validate-form" enctype="multipart/form-data" asp-action="createproduct" novalidate>
             <div asp-validation-summary="ModelOnly" class="error"></div>
             <div class="form-group mb-4">
                 <label asp-for="Name"></label>
-                <input asp-for="Name" type="text">
+                <span>*</span>
+                <input required minlength="2" asp-for="Name" type="text">
                 <span asp-validation-for="Name"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="form-group mb-4">
                 <label asp-for="Description"></label>
-                <textarea asp-for="Description" type="text"></textarea>
+                <textarea minlength="10" asp-for="Description" type="text"></textarea>
                 <span asp-validation-for="Description"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="form-group mb-4">
                 <label asp-for="Price"></label>
-                <input asp-for="Price" type="text">
+                <span>*</span>
+                <input required pattern="^\d{1,3}(?:,\d{3})*(\.\d{1,2})?$" asp-for="Price" type="text">
                 <span asp-validation-for="Price"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="form-group mb-4">
                 <label asp-for="OldPrice"></label>
-                <input asp-for="OldPrice" type="text">
+                <input pattern="^\d{1,3}(?:,\d{3})*(\.\d{1,2})?$" asp-for="OldPrice" type="text">
                 <span asp-validation-for="OldPrice"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="form-group mb-4">
                 <label asp-for="CategoryId"></label>
-                <select class="d-block" asp-for="CategoryId">
+                <span>*</span>
+                <select required class="d-block" asp-for="CategoryId">
                     @foreach(var category in await productCategoryService.GetAllAsync())
                     {
                         <option value="@category.Value">@category.Name</option>

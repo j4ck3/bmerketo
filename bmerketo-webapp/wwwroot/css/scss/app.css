@@ -412,6 +412,7 @@ header .toggle .btn-white {
 }
 .contact-form form .form-group {
   width: 100%;
+  position: relative;
 }
 .contact-form form .form-group label {
   display: block;
@@ -436,6 +437,11 @@ header .toggle .btn-white {
 }
 .contact-form form .form-group textarea:focus, .contact-form form .form-group input:focus, .contact-form form .form-group input:not([type=checkbox]):focus {
   outline: 1px solid #aeaeae;
+}
+.contact-form form .form-group .validate-icon {
+  position: absolute;
+  top: 43px;
+  right: 20px;
 }
 .contact-form form .name {
   grid-area: name;

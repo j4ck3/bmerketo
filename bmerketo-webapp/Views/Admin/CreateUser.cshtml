@@ -1,59 +1,77 @@
 ﻿@model CreateUserViewModel
+@{
+    string passwordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':""\\|,.<>\/?]).+$";
+}
 <partial name="/Views/Shared/Partials/Sections/_AdminNav.cshtml" />
 <section class="contact-form">
     <div class="container">
         <h2 class="title mb-3">New User</h2>
-        <form id="register-form" method="POST" asp-action="createuser" novalidate>
+        <form id="register-form" method="POST" class="validate-form" asp-action="createuser" novalidate>
             <div asp-validation-summary="ModelOnly" class="error"></div>
             <div class="firstName form-group mb-3">
                 <label asp-for="FirstName"></label>
-                <input asp-for="FirstName" id="firstName" type="text">
+                <span>*</span>
+                <input custommaxlength="50" required asp-for="FirstName" id="firstName" type="text">
                 <span asp-validation-for="FirstName" class="error"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="lastName form-group mb-3">
                 <label asp-for="LastName"></label>
-                <input asp-for="LastName" id="lastName" type="text">
+                <span>*</span>
+                <input custommaxlength="50" required asp-for="LastName" id="lastName" type="text">
                 <span asp-validation-for="LastName" class="error"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="streetName form-group mb-3">
                 <label asp-for="StreetName"></label>
-                <input asp-for="StreetName" id="streetName" type="text">
+                <input custommaxlength="50" asp-for="StreetName" id="streetName" type="text">
                 <span asp-validation-for="StreetName" class="error"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="postalCode form-group mb-3">
                 <label asp-for="PostalCode"></label>
-                <input asp-for="PostalCode" id="postalCode" type="text">
+                <input custommaxlength="6" asp-for="PostalCode" id="postalCode" type="text">
                 <span asp-validation-for="PostalCode" class="error"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="city form-group mb-3">
                 <label asp-for="City"></label>
-                <input asp-for="City" id="city" type="text">
+                <input custommaxlength="50" asp-for="City" id="city" type="text">
                 <span asp-validation-for="City" class="error"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="mobile form-group mb-3">
                 <label asp-for="PhoneNumber"></label>
                 <input asp-for="PhoneNumber" id="mobile" type="text">
                 <span asp-validation-for="PhoneNumber" class="error"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="company form-group mb-3">
                 <label asp-for="Company"></label>
                 <input asp-for="Company" id="company" type="text">
                 <span asp-validation-for="Company" class="error"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="email form-group mb-3">
                 <label asp-for="Email"></label>
-                <input asp-for="Email" id="email" type="email">
+                <span>*</span>
+                <input required pattern="[a-zA-Z0-9._%+-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" asp-for="Email" id="email" type="email">
                 <span asp-validation-for="Email" class="error"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="password form-group mb-3">
                 <label asp-for="Password"></label>
-                <input asp-for="Password" id="password" type="password">
+                <span>*</span>
+                <input required minlength="8" pattern="@passwordRegex" asp-for="Password" id="password" type="password">
                 <span asp-validation-for="Password" class="error"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="confirmPassword form-group mb-3">
                 <label asp-for="ConfirmPassword"></label>
-                <input asp-for="ConfirmPassword" id="confirmPassword" type="password">
+                <span>*</span>
+                <input required match="password" asp-for="ConfirmPassword" id="confirmPassword" type="password">
                 <span asp-validation-for="ConfirmPassword" class="error"></span>
+                <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="profileImage form-group">
                 <label for="profileImage">Upload Profile Image (optional)</label>

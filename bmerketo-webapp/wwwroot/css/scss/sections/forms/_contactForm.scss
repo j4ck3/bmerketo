@@ -49,11 +49,12 @@
 
         .form-group {
             width: 100%;
+            position: relative;
 
             label {
                 display: block;
                 margin-bottom: 5px;
-                display: inline-block!important;
+                display: inline-block !important;
             }
 
             span {
@@ -76,6 +77,12 @@
                 &:focus {
                     outline: 1px solid #aeaeae
                 }
+            }
+
+            .validate-icon {
+                position: absolute;
+                top: 43px;
+                right: 20px;
             }
         }
         // contact form

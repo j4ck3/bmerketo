@@ -2,17 +2,5 @@
   {
     "outputFile": "wwwroot/css/scss/app.css",
     "inputFile": "wwwroot/css/scss/app.scss"
-  },
-  {
-    "outputFile": "wwwroot/css/scss/components/_productTile.css",
-    "inputFile": "wwwroot/css/scss/components/_productTile.scss"
-  },
-  {
-    "outputFile": "wwwroot/css/scss/sections/forms/_contactForm.css",
-    "inputFile": "wwwroot/css/scss/sections/forms/_contactForm.scss"
-  },
-  {
-    "outputFile": "wwwroot/css/scss/sections/_adminNav.css",
-    "inputFile": "wwwroot/css/scss/sections/_adminNav.scss"
   }
 ]
