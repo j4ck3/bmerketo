@@ -152,14 +152,12 @@ public class UserService
             {
                 var currentRoles = await _userManager.GetRolesAsync(user);
 
-                // ------ Remove roles that are unchecked
                 var rolesToRemove = currentRoles.Except(roles);
                 foreach (var role in rolesToRemove)
                 {
                     await _userManager.RemoveFromRoleAsync(user, role);
                 }
 
-                // ------- Add roles that are checked
                 var rolesToAdd = roles.Except(currentRoles);
                 foreach (var role in rolesToAdd)
                 {

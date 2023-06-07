@@ -72,8 +72,6 @@ public class ProductService
         {
             ProductEntity productEntity = form;
             productEntity.CategoryId = form.CategoryId;
-            // = (await _categoryService.GetOrCreateAsync(productEntity.Category)).Id;
-
 
             var result = await _productRepo.AddAsync(productEntity);
             return result;

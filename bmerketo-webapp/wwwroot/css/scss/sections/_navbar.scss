@@ -23,12 +23,16 @@ header {
     menu {
         grid-area: menu;
         font-family: $font-poppins;
+        background-color: white;
+        margin-top: 240px;
 
 
         @include lg {
             display: flex;
             justify-content: flex-end;
             align-items: center;
+            background-color: transparent;
+            margin-top: 0;
         }
 
 

@@ -65,9 +65,9 @@
     }
 
     <partial name="../Shared/Partials/Components/_Tabs" model="Model" />
-    @if (Model.Category != null)
+    @if (Model != null && Model.Category != null)
     {
-        var items = await productService.GetAllAsync(Model.Category.Name);
+        var items = await productService.GetAllAsync(Model.Category.Name!);
 
         @if (items != null)
         {

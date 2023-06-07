@@ -120,12 +120,16 @@ header .logo {
 header menu {
   grid-area: menu;
   font-family: "Poppins", sans-serif;
+  background-color: white;
+  margin-top: 240px;
 }
 @media (min-width: 992px) {
   header menu {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    background-color: transparent;
+    margin-top: 0;
   }
 }
 header menu .menu-links {

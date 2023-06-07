@@ -1,7 +1,6 @@
-//credits: code from codebubb on yt with modifications.
 const validateForm = formSelector => {
     const formElement = document.querySelector(formSelector);
-
+    const passwordRegExErrorMsg = "Password must be atleast 8 characters in length and include atleast one uppercase letter, one lowercase letter, one number, and one special character "
     const validationOptions = [
         {
             attribute: 'minlength',
@@ -26,8 +25,13 @@ const validateForm = formSelector => {
                 const patternRegex = new RegExp(input.pattern);
                 return patternRegex.test(input.value);
             },
-            errorMessage: (input, label) =>
-                `${label.textContent} should be a valid ${label.textContent}`,
+            errorMessage: (input, label) => {
+                if (label.textContent == "Password") {
+                    return `${passwordRegExErrorMsg}`
+                } else {
+                    return `Not a valid ${label.textContent}`
+                }
+            }
         },
         {
             attribute: 'match',
@@ -37,11 +41,7 @@ const validateForm = formSelector => {
                 return matchedElem && matchedElem.value.trim() === input.value.trim();
             },
             errorMessage: (input, label) => {
-                const matchSelector = input.getAttribute('match');
-                const matchedElem = document.querySelector(`#${matchSelector}`);
-                const matchedLabel =
-                    matchedElem.parentElement.querySelector('label');
-                return `Passwords does not match ${matchedLabel}`;
+                return `Password does not match`;
             },
         },
         {
@@ -85,22 +85,6 @@ const validateForm = formSelector => {
             validateSingleFormGroup(event.srcElement.parentElement);
         })
     );
-
-
-    //formElement.addEventListener('submit', event => {
-    //    event.preventDefault();
-    //    validateAllFormGroups(formElement);
-    //});
-
-    //const validateAllFormGroups = formToValidate => {
-    //    const formGroups = Array.from(
-    //        formToValidate.querySelectorAll('.form-group')
-    //    );
-
-    //    formGroups.forEach(formGroup => {
-    //        validateSingleFormGroup(formGroup);
-    //    });
-    //};
 };
 
 validateForm('.validate-form');

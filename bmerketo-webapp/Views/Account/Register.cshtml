@@ -10,14 +10,14 @@
             <div class="firstName form-group mb-3">
                 <label asp-for="FirstName"></label>
                 <span>*</span>
-                <input required custommaxlength="50" asp-for="FirstName" id="firstName" type="text">
+                <input required custommaxlength="50" pattern="^[^\d]*$" asp-for="FirstName" id="firstName" type="text">
                 <span asp-validation-for="FirstName" class="error"></span>
                  <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
             <div class="lastName form-group mb-3">
                 <label asp-for="LastName"></label>
                 <span>*</span>
-                <input required custommaxlength="50" asp-for="LastName" id="lastName" type="text">
+                <input required custommaxlength="50" pattern="^[^\d]*$" asp-for="LastName" id="lastName" type="text">
                 <span asp-validation-for="LastName" class="error"></span>
                  <partial name="/Views/Shared/Partials/Components/_FormValidationIndicators.cshtml" />
             </div>
